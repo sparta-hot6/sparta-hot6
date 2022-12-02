@@ -1,3 +1,5 @@
+CREATE DATABASE hotsix;
+
 CREATE TABLE user
 (
     id               int PRIMARY KEY AUTO_INCREMENT,
