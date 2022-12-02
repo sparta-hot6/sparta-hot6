@@ -1,6 +1,9 @@
 from flask import Flask, render_template
 import pymysql
 
+import logging
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG, format='%(asctime)s %(message)s')
+
 
 app = Flask(__name__)
 
