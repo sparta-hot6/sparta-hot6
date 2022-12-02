@@ -33,3 +33,10 @@ git push origin <mybranch-name>
 ## 자신의 브랜치에서 master로 병합 요청
 깃허브의 pull request에서 자신 브랜치 => master 브랜치로 병합요청
 한 번에 많이 하기보다는 자주 하면 좋습니다.
+
+## 추가사항
+깃허브 리포지토리에 있는 issues 사용.
+
+현재 개발해야할 사항들을 issue로 올려놓고 위에서 pull request를 할 때에 내용에
+
+resolve #이슈번호 해주시면 해결 완료가 됩니다. 
