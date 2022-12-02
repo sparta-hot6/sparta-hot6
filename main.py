@@ -16,6 +16,15 @@ def connect_db():
 def home():
     return render_template('index.html')
 
+# ---- hoon 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def sginup():
+    return render_template('signup.html')
+# ---- hoon 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', port=5000, debug=True)
