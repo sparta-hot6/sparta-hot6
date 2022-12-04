@@ -42,25 +42,27 @@
         
     </style>
 <body>
-    <form>
-          
+    <form methods="get" id="login" action = {{url_for("login")}}>
+        <a href= {{ url_for("home") }}>home</a>
         <h1>Please login</h1>
         <div class="form-floating1">
-          <input type="email" class="form-control" id="floatingInput" placeholder="ID">
+          <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
           <label for="floatingInput"></label>
         </div>
         <div class="form-floating2">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" class="form-control" id="floatingPassword" name="floatingPassword" placeholder="Password">
           <label for="floatingPassword"></label>
         </div>
 
-
         <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-       <a href="signup"><p class="signup">Sign Up</p></a>
+       <a href= {{ url_for('sginup') }}><p class="signup">Sign Up</p></a>
         <p class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
+
       </form>
+
+<script>
     
-    
+</script>
 </body>
 
 </html>
