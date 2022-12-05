@@ -15,14 +15,6 @@
     <title>login</title>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-<!-- {%with messages = get_flashed_messages()%}
-{%if messages %}
-    <script type="text/javascript">
-    alert("{{messages[-1]}}");
-    </script>
-    {%endif%}
-{%endwith%} -->
-
 </head>
     <style>
         body {
@@ -46,29 +38,20 @@
         .form-floating2 {
             color: black;
         }
-/* 
-        .HOTSIX{
-            margin-top: 20px;
-        } */
-
-        /* #login_confirm {
-            display: none;
-        } */
-
         
     </style>
 <body>
     
-    <form methods="get" id="login" action = {{url_for("login")}}>
+    <form action = {{url_for("login")}} methods="GET">
         <a href= {{ url_for("home") }}>home</a>
         <h1>Please login</h1>
         <div class="form-floating1">
-          <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
+          <input type="id" class="form-control" name="floatingInput" placeholder="ID">
           <label for="floatingInput"></label>
         </div>
 
         <div class="form-floating2">
-          <input type="password" class="form-control" id="floatingPassword" name="floatingPassword" placeholder="Password">
+          <input type="password" class="form-control" name="floatingPassword" placeholder="Password">
           <label for="floatingPassword"></label>
         </div>
         

@@ -1,50 +1,64 @@
-from flask import url_for, session, Flask, render_template , request , redirect, jsonify, flash
+from flask import url_for, session, Flask, render_template , request , redirect, jsonify
 import requests
 import pymysql
 
-from dbclass import Get_db
+import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
 app = Flask(__name__)
-app.secret_key = "hoon"
-
-# 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
-# 라우트 내부에서 db = connect_db() 형식으로 이용.
-def connect_db():
-    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='930523', db='hotsix', charset='utf8')
-    return db
+app.secret_key = "hotsix_secret_key"
 
 @app.route('/')
 def home():
-    if "login_id" in session:
-        return render_template("index.html", user_name = session.get("login_id"), login = True)
+    # PRIMARY_KEY_ID = 로그인한 유저의 고유번호 입니다.
+    if "PRIMARY_KEY_ID" in session:
+        return render_template("index.html", user_name = session.get("login_name"), login = True)
     else:
         return render_template("index.html", login = False)
     
 # ---- hoon -- 로그인 구역
-@app.route('/login', methods = ["GET","POST"])
+@app.route('/login/', methods=['GET', 'POST'])
+# def login():
+#     login_confirm = ''
+#     if request.method == 'POST':
+#         input_id = request.form['floatingInput']            # login 화면에서 input받은 값을 가져옵니다.
+#         input_pw = request.form['floatingPassword']         # login 화면에서 input받은 값을 가져옵니다.
+
+#         login_info = dbfunction.get_db_user(input_id, input_pw) # input값들이 db에 있는지 체크 없다면 None 입니다.
+    
+#         if login_info != None:                                  # None이 아닐경우 session 저장됩니다.
+#             session['login_name']      = login_info["name"]     # session 으로 name 을 저장해 유저의 이름을 활용할수있습니다.
+#             session['PRIMARY_KEY_ID']  = login_info["id"]       # session 으로 유저의 고유번호를 저장 
+#             return redirect(url_for("home"))                    # 세션이 저장되고 home 으로 보냅니다.
+#         else:                                                   
+#             login_confirm = 'Please check your ID or password'  # input값들과 같은것이 없다면 에러 (None일 경우)
+#             return render_template('login.html', login_confirm = login_confirm)
+            
+#     return render_template('login.html') # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
+
+
 def login():
-    login_succed = "login succed"
-
-    input_id = request.args.get("floatingInput")
-    input_pw = request.args.get("floatingPassword")
-
-    login_arr = Get_db.login_confirm(input_id, input_pw)
-    name          = login_arr[0]
-    login_confirm = login_arr[1]
-
-    if login_confirm == login_succed:
-        session["login_id"] = name
-        return redirect(url_for("home"))
-
+    login_confirm = ''
     if request.method == "GET":
-        if login_confirm != login_succed:
-            # flash(login_confirm)
-            # return render_template('login.html')
+        input_id = request.args.get("floatingInput")
+        input_pw = request.args.get("floatingPassword")
+
+        login_info = dbfunction.get_db_user(input_id, input_pw)
+
+        if login_info is not None:                                 
+            session['login_name']      = login_info["name"]    
+            session['PRIMARY_KEY_ID']  = login_info["id"]       
+            return redirect(url_for("home"))                   
+
+        elif login_info is None:
+            login_confirm = 'Please check your ID or password'
             return render_template('login.html', login_confirm = login_confirm)
+
+    return render_template('login.html')
+
 
 @app.route('/logout')
 def logout():
-    session.pop("login_id")
+    session.pop("PRIMARY_KEY_ID")
     return redirect(url_for("home"))
 
 @app.route('/signup')
