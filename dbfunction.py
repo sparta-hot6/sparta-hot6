@@ -31,37 +31,3 @@ def get_db_user(ID, PW):
 # input_id= 'jmoon581'
 # input_pw= '930523'
 # print(get_db_user(input_id,input_pw))
-
-
-
-
-
-#---- 사용 할지 고민중입니다.
-
-    # def login_confirm(input_id, input_pw):
-    #     db = Get_db.get_db_user()
-    #     id = input_id
-    #     pw = input_pw
-
-    #     login_confirm  = 'login fail'
-    #     name           = None
-    #     PRIMARY_KEY_ID = None
-    #     for i in range(len(db)):
-
-    #         if db[i]["login_id"] == id and db[i]["password"] == pw:
-    #             login_confirm  = "login succed"
-    #             name           = db[i]["name"]
-    #             PRIMARY_KEY_ID = db[i]["id"]
-    #         elif db[i]["login_id"] == id and db[i]["password"] != pw:  
-    #             login_confirm = "worng password"   
-                
-    #         # elif db[i]["login_id"] != id and db[i]["password"] == pw:  
-    #         #     login_confirm = "check your id"
-
-    #     return [name, login_confirm, PRIMARY_KEY_ID]
-
-# # input_id = "soo581"
-# # input_pw = "9811"
-
-# # print(Get_db.login_confirm(input_id,input_pw))
-#---- 사용 할지 고민중입니다.

@@ -16,44 +16,25 @@ def home():
         return render_template("index.html", login = False)
     
 # ---- hoon -- 로그인 구역
-@app.route('/login/', methods=['GET', 'POST'])
-# def login():
-#     login_confirm = ''
-#     if request.method == 'POST':
-#         input_id = request.form['floatingInput']            # login 화면에서 input받은 값을 가져옵니다.
-#         input_pw = request.form['floatingPassword']         # login 화면에서 input받은 값을 가져옵니다.
-
-#         login_info = dbfunction.get_db_user(input_id, input_pw) # input값들이 db에 있는지 체크 없다면 None 입니다.
-    
-#         if login_info != None:                                  # None이 아닐경우 session 저장됩니다.
-#             session['login_name']      = login_info["name"]     # session 으로 name 을 저장해 유저의 이름을 활용할수있습니다.
-#             session['PRIMARY_KEY_ID']  = login_info["id"]       # session 으로 유저의 고유번호를 저장 
-#             return redirect(url_for("home"))                    # 세션이 저장되고 home 으로 보냅니다.
-#         else:                                                   
-#             login_confirm = 'Please check your ID or password'  # input값들과 같은것이 없다면 에러 (None일 경우)
-#             return render_template('login.html', login_confirm = login_confirm)
-            
-#     return render_template('login.html') # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
-
-
+@app.route('/login', methods = ["GET","POST"])
 def login():
     login_confirm = ''
-    if request.method == "GET":
-        input_id = request.args.get("floatingInput")
-        input_pw = request.args.get("floatingPassword")
+    if request.method == 'POST':
+        input_id = request.form['floatingInput']                # login 화면에서 input받은 값을 가져옵니다.
+        input_pw = request.form['floatingPassword']             # login 화면에서 input받은 값을 가져옵니다.
+        print(input_id, input_pw)
+        login_info = dbfunction.get_db_user(input_id, input_pw) # input값들이 db에 있는지 체크 없다면 None 입니다.
+    
+        if login_info is not None:                              # None이 아닐경우 session 저장됩니다.
+            session['login_name']      = login_info["name"]     # session 으로 name 을 저장해 유저의 이름을 활용할수있습니다.
+            session['PRIMARY_KEY_ID']  = login_info["id"]       # session 으로 유저의 고유번호를 저장 
+            return redirect(url_for("home"))                    # 세션이 저장되고 home 으로 보냅니다.
 
-        login_info = dbfunction.get_db_user(input_id, input_pw)
-
-        if login_info is not None:                                 
-            session['login_name']      = login_info["name"]    
-            session['PRIMARY_KEY_ID']  = login_info["id"]       
-            return redirect(url_for("home"))                   
-
-        elif login_info is None:
-            login_confirm = 'Please check your ID or password'
+        elif login_info is None:                                                    
+            login_confirm = 'Please check your ID or password'  # input값들과 같은것이 없다면 에러 (None일 경우)
             return render_template('login.html', login_confirm = login_confirm)
-
-    return render_template('login.html')
+            
+    return render_template('login.html') # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
 
 
 @app.route('/logout')
@@ -62,7 +43,7 @@ def logout():
     return redirect(url_for("home"))
 
 @app.route('/signup')
-def sginup():
+def signup():
     return render_template('signup.html')
 
 @app.route('/signupsucceded')
