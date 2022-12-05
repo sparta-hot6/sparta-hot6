@@ -1,11 +1,30 @@
 from flask import url_for, session, Flask, render_template , request , redirect, jsonify, flash
 import requests
 import pymysql
-
+import logging
 from dbclass import Get_db
 
 app = Flask(__name__)
 app.secret_key = "hoon"
+
+# 로그 생성
+logger = logging.getLogger('test')
+
+# 로그의 출력 기준 설정
+logger.setLevel(logging.DEBUG)
+
+# log 출력 형식
+formatter = logging.Formatter('[%(asctime)s][%(levelname)s|%(filename)s:%(lineno)s] >> %(message)s')
+#handler 생성
+streamHandler = logging.StreamHandler()
+fileHandler = logging.FileHandler('./test.log')
+# logger instance에 fomatter 설정
+streamHandler.setFormatter(formatter)
+fileHandler.setFormatter(formatter)
+# logger instance에 handler 설정
+logger.addHandler(streamHandler)
+logger.addHandler(fileHandler)
+
 
 # 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
 # 라우트 내부에서 db = connect_db() 형식으로 이용.
