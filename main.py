@@ -1,6 +1,8 @@
-from flask import url_for, session, Flask, render_template , request , redirect
+from flask import url_for, session, Flask, render_template , request , redirect, jsonify, flash
+import requests
 import pymysql
 
+from dbclass import Get_db
 
 app = Flask(__name__)
 app.secret_key = "hoon"
@@ -19,22 +21,26 @@ def home():
         return render_template("index.html", login = False)
     
 # ---- hoon -- 로그인 구역
-# db 에서 받은 정보 예시
-login_id = "jmoon581"
-password = "930523"
-name = "정성훈"
-
-@app.route('/login', methods = ["get"])
+@app.route('/login', methods = ["GET","POST"])
 def login():
-    global login_id, password, name
-    _id_ = request.args.get("floatingInput")
-    _pw_ = request.args.get("floatingPassword")
+    login_succed = "login succed"
 
-    if login_id == _id_ and password == _pw_:
+    input_id = request.args.get("floatingInput")
+    input_pw = request.args.get("floatingPassword")
+
+    login_arr = Get_db.login_confirm(input_id, input_pw)
+    name          = login_arr[0]
+    login_confirm = login_arr[1]
+
+    if login_confirm == login_succed:
         session["login_id"] = name
         return redirect(url_for("home"))
-    else:
-        return render_template('login.html')
+
+    if request.method == "GET":
+        if login_confirm != login_succed:
+            # flash(login_confirm)
+            # return render_template('login.html')
+            return render_template('login.html', login_confirm = login_confirm)
 
 @app.route('/logout')
 def logout():
