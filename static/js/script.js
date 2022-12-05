@@ -1,21 +1,15 @@
-const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
-const btnOpenPopup = document.querySelector('.btn-open-popup');
+    window.onload = function() {
 
-btnOpenPopup.addEventListener('click', () => {
-    modal.classList.toggle('show');
-
-    if (modal.classList.contains('show')) {
-        body.style.overflow = 'hidden';
+    function onClick() {
+        document.querySelector('.modal_wrap').style.display ='block';
+        document.querySelector('.black_bg').style.display ='block';
     }
-});
-
-modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.classList.toggle('show');
-
-        if (!modal.classList.contains('show')) {
-            body.style.overflow = 'auto';
-        }
+    function offClick() {
+        document.querySelector('.modal_wrap').style.display ='none';
+        document.querySelector('.black_bg').style.display ='none';
     }
-});
+
+    document.getElementById('modal_btn').addEventListener('click', onClick);
+    document.querySelector('.modal_close').addEventListener('click', offClick);
+
+};
