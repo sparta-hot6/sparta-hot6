@@ -3,22 +3,24 @@ from flask import url_for, session, Flask, render_template , request , redirect,
 import requests
 import pymysql
 import logging
+import logging.handlers
 from dbclass import Get_db
 
 app = Flask(__name__)
 app.secret_key = "hoon"
 
 # 로그 생성
-logger = logging.getLogger('test')
-
+logger = logging.getLogger('hotsix')
 # 로그의 출력 기준 설정
 logger.setLevel(logging.DEBUG)
-
 # log 출력 형식
 formatter = logging.Formatter('[%(asctime)s][%(levelname)s|%(filename)s:%(lineno)s] >> %(message)s')
 # handler 생성
 streamHandler = logging.StreamHandler()
-fileHandler = logging.FileHandler('./test.log')
+log_max_size = 10 * 1024 * 1024
+log_file_count = 20
+fileHandler = logging.handlers.RotatingFileHandler(filename='./log.txt', maxBytes=log_max_size,
+                                                   backupCount=log_file_count)
 # logger instance에 fomatter 설정
 streamHandler.setFormatter(formatter)
 fileHandler.setFormatter(formatter)
@@ -26,13 +28,11 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 logger.addHandler(fileHandler)
 
-
 # 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
 # 라우트 내부에서 db = connect_db() 형식으로 이용.
 def connect_db():
     db = pymysql.connect(host="localhost", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
     return db
-
 
 @app.route('/')
 def home():
@@ -75,7 +75,6 @@ def sginup():
 @app.route('/signupsucceded')
 def route():
     pass
-
 
 # ---- hoon -- 로그인 구역
 
