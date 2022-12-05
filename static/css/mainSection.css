@@ -1,0 +1,31 @@
+
+.back_img {
+    height: 350px;
+    width: 80%;
+    display: block;
+    margin : 3px auto;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+.profile {
+    display: flex;
+}
+.profile_img {
+    position: relative;
+    width : 150px;
+    height: 150px;
+    border-radius: 70%;
+    margin : 10px 0 20px 10%;
+    object-fit: cover;
+}
+
+.profile_name{
+    margin : auto auto auto 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.btn-open-popup {
+    height : 40px;
+    margin-right: 10%;
+    margin-top : 10%;
+}
