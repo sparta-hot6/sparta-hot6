@@ -14,11 +14,9 @@
 <header>
     <h1>PROFILE PAGE</h1>
     <div>
-        <ul onclick="">HOME</ul>
+        <ul>HOME</ul>
         <ul>LOGOUT</ul>
     </div>
-
-
 </header>
 <section>
     <img class="back_img" src="/static/img/배경예시.jpg" alt="img">
@@ -28,14 +26,24 @@
         <button type='button' id="modal_btn">프로필 수정</button>
     </div>
 
-<!--모달창 시작-->
+    <!--모달창 시작-->
     <div class="black_bg"></div>
     <div class="modal_wrap">
         <div class="modal_close"><a href="#">close</a></div>
-<!--모달창 내부 내용-->
+        <!--모달창 헤더부분-->
         <div class="modal_top">
             <h1>프로필 수정</h1>
         </div>
+        <!--모달창 프로필 사진 부분-->
+        <div class="modal_profile">
+            프로필 사진 <span>수정</span>
+        </div>
+        <img class="modal_profile_img" src="/static/img/기본 이미지.jpg" alt="img">
+        <!--모달창 배경 사진 부분-->
+        <div class="modal_profile">
+            배경 사진 <span>수정</span>
+        </div>
+        <img class="modal_back_img" src="/static/img/배경예시.jpg" alt="img">
     </div>
     <hr style="width:80%">
     <h2 style="margin-left:10%">내가 작성한 글</h2>
