@@ -1,10 +1,8 @@
-import logging
 
-from flask import url_for, session, Flask, render_template, request, redirect, jsonify, flash
+from flask import url_for, session, Flask, render_template , request , redirect, jsonify, flash
 import requests
 import pymysql
 import logging
-
 from dbclass import Get_db
 
 app = Flask(__name__)
@@ -32,7 +30,7 @@ logger.addHandler(fileHandler)
 # 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
 # 라우트 내부에서 db = connect_db() 형식으로 이용.
 def connect_db():
-    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
+    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
     return db
 
 
@@ -42,8 +40,6 @@ def home():
         return render_template("index.html", user_name=session.get("login_id"), login=True), logger.info('로그인 성공 메인')
     else:
         return render_template("index.html", login=False), logger.info('로그인 실패 메인')
-
-
 # ---- hoon -- 로그인 구역
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -66,12 +62,10 @@ def login():
             # return render_template('login.html')
             return render_template('login.html', login_confirm=login_confirm), logger.info('로그인 하세요')
 
-
 @app.route('/logout')
 def logout():
     session.pop("login_id")
     return redirect(url_for("home")), logger.info('로그아웃')
-
 
 @app.route('/signup')
 def sginup():

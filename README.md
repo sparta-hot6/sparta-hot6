@@ -8,22 +8,22 @@
 
 ## 로컬로 가져오기
 http 사용시
-``` bash
+```bash
 git clone https://github.com/sparta-hot6/sparta-hot6.git
 ```
 ssh
-``` bash
+```bash
 git clone git@github.com:sparta-hot6/sparta-hot6.git
 ```
 
 ## 작업하기
-``` bash
+```bash
 git checkout <mybranch-name>
 ```
 
 ## 작업 후 github에 올리기
 
-``` bash
+```bash
 # 최신화(master branch의 내용을 받아옴)
 git pull origin master
 # 자기 브랜치에 올리기
@@ -39,4 +39,4 @@ git push origin <mybranch-name>
 
 현재 개발해야할 사항들을 issue로 올려놓고 위에서 pull request를 할 때에 내용에
 
-resolve #이슈번호 해주시면 해결 완료가 됩니다. 
+resolve #이슈번호 해주시면 해결 완료가 됩니다.
