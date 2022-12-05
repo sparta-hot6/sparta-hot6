@@ -15,6 +15,14 @@
     <title>login</title>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
+<!-- {%with messages = get_flashed_messages()%}
+{%if messages %}
+    <script type="text/javascript">
+    alert("{{messages[-1]}}");
+    </script>
+    {%endif%}
+{%endwith%} -->
+
 </head>
     <style>
         body {
@@ -38,10 +46,19 @@
         .form-floating2 {
             color: black;
         }
+/* 
+        .HOTSIX{
+            margin-top: 20px;
+        } */
+
+        /* #login_confirm {
+            display: none;
+        } */
 
         
     </style>
 <body>
+    
     <form methods="get" id="login" action = {{url_for("login")}}>
         <a href= {{ url_for("home") }}>home</a>
         <h1>Please login</h1>
@@ -49,20 +66,44 @@
           <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
           <label for="floatingInput"></label>
         </div>
+
         <div class="form-floating2">
           <input type="password" class="form-control" id="floatingPassword" name="floatingPassword" placeholder="Password">
           <label for="floatingPassword"></label>
         </div>
+        
+        <button onclick="login_confirm()" class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
        <a href= {{ url_for('sginup') }}><p class="signup">Sign Up</p></a>
-        <p class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
+
+        <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
+
+        <div id="login_confirm">{{login_confirm}}</div>
 
       </form>
 
 <script>
-    
+    // function login_confirm(){
+    //     count = 0
+    //     if 
+    // }
+    // function reload(){
+    //     // location.reload();
+    //     let login_confirm = `<p id="login_confirm">{{login_confirm}}</p>`
+    //     $('#login_confirm').append(login_confirm)
+    // }
+
+    // function login_confirm(){
+    // //     let login_confirm = document.querySelector('#login_confirm').innerHTML
+    // //     $('#loginoutBox').append()
+    //     // document.getElementById("login_confirm").style.display = 'block';
+    // let login_confirm = document.querySelector('#login_confirm').innerHTML
+    // console.log(login_confirm);
+    // // location === window.location
+    // alert(login_confirm)
+    // }
 </script>
+
 </body>
 
 </html>
