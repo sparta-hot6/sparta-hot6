@@ -8,9 +8,6 @@ window.onload = function () {
     document.querySelector(".black_bg").style.display = "none";
   }
 
-  document.getElementById("modal_btn").addEventListener("click", onClick);
-  document.querySelector(".modal_close").addEventListener("click", offClick);
-
   $.ajax({
     type: "GET",
     url: "/api/profile",
@@ -18,10 +15,14 @@ window.onload = function () {
     success: function (data) {
       const { name, login_id, profile_image, background_image } = data;
       $("#profile_name").text(name);
-      bg_path = "/api/file/" + background_image;
-      pf_path = "/api/file/" + profile_image;
-      $("#back_img").attr("src", bg_path);
-      $("#profile_img").attr("src", pf_path);
+      if (background_image) {
+        bg_path = "/api/file/" + background_image;
+        $("#back_img").attr("src", bg_path);
+      }
+      if (profile_image) {
+        pf_path = "/api/file/" + profile_image;
+        $("#profile_img").attr("src", pf_path);
+      }
     },
   });
 };

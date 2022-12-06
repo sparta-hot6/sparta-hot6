@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/header.css">
     <link rel="stylesheet" type="text/css" href="/static/css/mainSection.css">
     <link rel="stylesheet" type="text/css" href="/static/css/feed.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/modal.css">
     <script
   src="https://code.jquery.com/jquery-3.6.1.min.js"
   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -31,7 +30,7 @@
     <div class="profile">
         <img id="profile_img" src="/static/img/기본 이미지.jpg" alt="img">
         <h1 id="profile_name">한동주</h1>
-        <button type='button' id="modal_btn">프로필 수정</button>
+        <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="modal_btn">프로필 수정</button>
     </div>
 
     <!--모달창 시작-->
