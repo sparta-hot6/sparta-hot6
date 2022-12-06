@@ -1,18 +1,82 @@
-from flask import Blueprint
+from flask import Blueprint, session, request
+import pymysql
+from pymysql.cursors import DictCursor
+from upload import upload_file, download_file
+
+
+def MySQL_connect():
+    db = pymysql.connect(
+        host='localhost',
+        port=3306,
+        user='root',
+        password='sparta',
+        db='hotsix',
+        charset='utf8')
+    return db
+
 
 # api Blueprint를 main에 url_prefix를 /api로 등록시켜놓음
 # api.route('/profile')은 '/api/profile'에 매칭되며,
 # url_for를 쓸 경우엔 함수명 앞에 블루프린트명인 api. 을 붙여줘야한다. ex) url_for('api.get_posts')
 api = Blueprint('api', __name__, template_folder='templates')
 
+
 @api.route('/profile', methods=['GET'])
 def get_profile():
-    pass
+    if "PRIMARY_KEY_ID" not in session:
+        return
+    user_id = session["PRIMARY_KEY_ID"]
+    sql = f"""
+    SELECT id, name, login_id, profile_image, background_image
+    FROM user
+    WHERE id = {user_id}
+    """
+    db = MySQL_connect()
+    cursor = db.cursor(DictCursor)
+    cursor.execute(sql)
+    data = cursor.fetchone()
+    db.close()
+    return data
 
 
 @api.route('/profile', methods=['PUT'])
 def put_profile():
-    pass
+    if "PRIMARY_KEY_ID" not in session:
+        return
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session["PRIMARY_KEY_ID"]
+    setquery = ''
+    name = None
+    pf_img = None
+    bg_img = None
+    if 'pf_name' in request.form:
+        name = request.form['pf_name']
+        setquery = setquery + \
+            f", name = {name}" if setquery else f"name = {name}"
+    if 'pf_img' in request.files:
+        pf_img = upload_file(request.files['pf_img'])
+        setquery = setquery + \
+            f", profile_image = '{pf_img}'" if setquery else f"profile_image = '{pf_img}'"
+    if 'bg_img' in request.files:
+        bg_img = upload_file(request.files['bg_img'])
+        setquery = setquery + \
+            f", background_image = '{bg_img}'" if setquery else f"background_image = '{bg_img}'"
+    if setquery:
+        sql = f"""
+      UPDATE user
+      SET {setquery}
+      WHERE id = {user_id}
+      """
+        cursor.execute(sql)
+        db.commit()
+    db.close()
+    return 'success'
+
+
+@api.route('/file/<filename>', methods=['GET'])
+def download_files(filename):
+    return download_file(filename)
 
 
 @api.route('/posts', methods=['GET'])
@@ -20,17 +84,17 @@ def get_posts():
     pass
 
 
-@api.route('/post', method=['POST'])
+@api.route('/post', methods=['POST'])
 def write_post():
     pass
 
 
-@api.route('/post', method=['PUT'])
+@api.route('/post', methods=['PUT'])
 def put_post():
     pass
 
 
-@api.route('/post', method=['DELETE'])
+@api.route('/post', methods=['DELETE'])
 def delete_post():
     pass
 
@@ -40,16 +104,16 @@ def get_comments():
     pass
 
 
-@api.route('/comment', method=['POST'])
+@api.route('/comment', methods=['POST'])
 def write_comment():
     pass
 
 
-@api.route('/comment', method=['PUT'])
+@api.route('/comment', methods=['PUT'])
 def put_comment():
     pass
 
 
-@api.route('/comment', method=['DELETE'])
+@api.route('/comment', methods=['DELETE'])
 def delete_comment():
     pass
