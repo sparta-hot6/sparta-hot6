@@ -13,7 +13,8 @@ app.template_folder = "templates"
 
 posts = dbfunction.get_posts_all()
 
-def get_posts(offset=0, per_page=10):
+def get_posts(offset=1, per_page=2):
+    #offset 까먹음 per_page = 보여주고싶은 페이지
     return posts[offset:offset + per_page]
 
 
