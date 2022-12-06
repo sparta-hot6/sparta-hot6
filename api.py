@@ -145,8 +145,8 @@ def delete_post():
     user_id = session['PRIMARY_KEY_ID']
     post_id = request.form['post_id']
     sql = f"""
-    DELETE post
-    SET {setquery}
+    DELETE
+    FROM post
     WHERE id = {post_id}, user_id = {user_id}
     """
     cursor.execute(sql)
