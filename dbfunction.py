@@ -49,7 +49,17 @@ def get_user_table(ID, PW):
 
     return user_info
 
+def get_posts_all():
+    db = MySQL_connect()
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+    cursor.execute('USE hotsix;')
 
+    cursor.execute(f'SELECT * FROM post')
+    posts_all = cursor.fetchall()
+
+    db.commit()
+    db.close()
+    return posts_all
 #------------------------------실행 예시-------------------------------
 # input_id= 'jmoon581'
 # input_pw= '930523'

@@ -3,7 +3,7 @@ import requests
 import pymysql
 import logging
 import logging.handlers
-from dbclass import Get_db
+
 
 import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
@@ -32,7 +32,7 @@ logger.addHandler(fileHandler)
 # 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
 # 라우트 내부에서 db = connect_db() 형식으로 이용.
 def connect_db():
-    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
+    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
     return db
 
 # ---- home -- 뉴스피드 구역 ---------------------------------------------------------------
