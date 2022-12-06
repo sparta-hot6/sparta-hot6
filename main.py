@@ -68,7 +68,7 @@ def logout():
     return redirect(url_for("home")), logger.info('로그아웃')
 
 @app.route('/signup')
-def sginup():
+def signup():
     return render_template('signup.html'), logger.info('회원가입 페이지')
 
 
