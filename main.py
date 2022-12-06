@@ -4,6 +4,7 @@ import pymysql
 import logging
 import logging.handlers
 from dbclass import Get_db
+from api import api
 
 import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
@@ -95,6 +96,8 @@ def route():
 
 
 
+
+app.register_blueprint(api, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
