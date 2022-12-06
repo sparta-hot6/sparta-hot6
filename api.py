@@ -2,18 +2,7 @@ from flask import Blueprint, session, request
 import pymysql
 from pymysql.cursors import DictCursor
 from upload import upload_file, download_file
-
-
-def MySQL_connect():
-    db = pymysql.connect(
-        host='localhost',
-        port=3306,
-        user='root',
-        password='sparta',
-        db='hotsix',
-        charset='utf8')
-    return db
-
+from dbfunction import MySQL_connect
 
 # api Blueprint를 main에 url_prefix를 /api로 등록시켜놓음
 # api.route('/profile')은 '/api/profile'에 매칭되며,
