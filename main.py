@@ -3,7 +3,6 @@ import requests
 import pymysql
 import logging
 import logging.handlers
-from dbclass import Get_db
 from api import api
 
 import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
@@ -36,7 +35,7 @@ def connect_db():
     db = pymysql.connect(host="localhost", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
     return db
 
-# ---- home -- 뉴스피드 구역 ---------------------------------------------------------------
+# ---- home -- 뉴스 피드 구역 ---------------------------------------------------------------
 @app.route('/')
 def home():
     # PRIMARY_KEY_ID = 로그인한 유저의 고유번호 입니다.
