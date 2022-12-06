@@ -302,4 +302,3 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,pycharm,flask
 
 uploads/*
-!uploads/dummy.txt
