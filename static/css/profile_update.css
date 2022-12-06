@@ -25,3 +25,7 @@
         border-radius: 20px;
         opacity: 0.8;
     }
+
+.file-input {
+  display: none;
+}
