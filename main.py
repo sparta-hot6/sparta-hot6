@@ -1,12 +1,39 @@
 from flask import url_for, session, Flask, render_template , request , redirect
 import requests
 import pymysql
+import logging
+import logging.handlers
+from dbclass import Get_db
 
 import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
 app = Flask(__name__)
 app.secret_key = "hotsix_secret_key"
 
+# 로그 생성
+logger = logging.getLogger('hotsix')
+# 로그의 출력 기준 설정
+logger.setLevel(logging.DEBUG)
+# log 출력 형식
+formatter = logging.Formatter('[%(asctime)s][%(levelname)s|%(filename)s:%(lineno)s] >> %(message)s')
+# handler 생성
+streamHandler = logging.StreamHandler()
+log_max_size = 10 * 1024 * 1024
+log_file_count = 20
+fileHandler = logging.handlers.RotatingFileHandler(filename='./log.txt', maxBytes=log_max_size,
+                                                   backupCount=log_file_count)
+# logger instance에 fomatter 설정
+streamHandler.setFormatter(formatter)
+fileHandler.setFormatter(formatter)
+# logger instance에 handler 설정
+logger.addHandler(streamHandler)
+logger.addHandler(fileHandler)
+
+# 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
+# 라우트 내부에서 db = connect_db() 형식으로 이용.
+def connect_db():
+    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
+    return db
 
 # ---- home -- 뉴스피드 구역 ---------------------------------------------------------------
 @app.route('/')
