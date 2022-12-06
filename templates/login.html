@@ -15,94 +15,55 @@
     <title>login</title>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-<!-- {%with messages = get_flashed_messages()%}
-{%if messages %}
-    <script type="text/javascript">
-    alert("{{messages[-1]}}");
-    </script>
-    {%endif%}
-{%endwith%} -->
-
 </head>
-    <style>
-        body {
-            color:whitesmoke;
-            background-color: rgb(33, 37, 41);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
+<style>
+    body {
+        color: whitesmoke;
+        background-color: rgb(33, 37, 41);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+    }
 
-        .signup {
-            margin-top: 5%;
-        }
+    .signup {
+        margin-top: 5%;
+    }
 
-        .form-floating1 {
-            margin-top: 15px;
-            color: black;
-        }
-        .form-floating2 {
-            color: black;
-        }
-/* 
-        .HOTSIX{
-            margin-top: 20px;
-        } */
+    .form-floating1 {
+        margin-top: 15px;
+        color: black;
+    }
 
-        /* #login_confirm {
-            display: none;
-        } */
+    .form-floating2 {
+        color: black;
+    }
 
-        
-    </style>
+</style>
+
 <body>
-    
-    <form methods="get" id="login" action = {{url_for("login")}}>
-        <a href= {{ url_for("home") }}>home</a>
+    <!-- form method="POST" 에  methods  s 를 붙이면 안된다... 이것때문에 4시간 날렷습니다.-->
+    <form method="POST" id="login" action='{{url_for("login")}}'>
+        <a href={{ url_for("home") }}>home</a>
         <h1>Please login</h1>
         <div class="form-floating1">
-          <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
-          <label for="floatingInput"></label>
+            <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
+            <label for="floatingInput"></label>
         </div>
-
         <div class="form-floating2">
-          <input type="password" class="form-control" id="floatingPassword" name="floatingPassword" placeholder="Password">
-          <label for="floatingPassword"></label>
+            <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+                placeholder="Password">
+            <label for="floatingPassword"></label>
         </div>
-        
-        <button onclick="login_confirm()" class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-
-       <a href= {{ url_for('sginup') }}><p class="signup">Sign Up</p></a>
-
+        <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+        <a href='{{url_for("signup")}}'>
+            <p class="signup">Sign Up</p>
+        </a>
         <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
-
+    </form>
         <div id="login_confirm">{{login_confirm}}</div>
-
-      </form>
-
-<script>
-    // function login_confirm(){
-    //     count = 0
-    //     if 
-    // }
-    // function reload(){
-    //     // location.reload();
-    //     let login_confirm = `<p id="login_confirm">{{login_confirm}}</p>`
-    //     $('#login_confirm').append(login_confirm)
-    // }
-
-    // function login_confirm(){
-    // //     let login_confirm = document.querySelector('#login_confirm').innerHTML
-    // //     $('#loginoutBox').append()
-    //     // document.getElementById("login_confirm").style.display = 'block';
-    // let login_confirm = document.querySelector('#login_confirm').innerHTML
-    // console.log(login_confirm);
-    // // location === window.location
-    // alert(login_confirm)
-    // }
-</script>
 
 </body>
 
