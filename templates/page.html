@@ -19,9 +19,6 @@
                 <thead>
                 <tr>
                     <th>
-                        count
-                    </th>
-                    <th>
                         user_id
                     </th>
                     <th>
@@ -30,12 +27,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!--flask에서 보내준 users를 순회하면서 user를 가져온다-->
+                <!--flask에서 보내준 posts를 순회하면서 post를 가져온다-->
                     {% for post in posts %}
                     <tr>
-                        <td>
-                            {{loop.index +(page-1)*per_page}}
-                        </td>
                         <td id="user_id" onclick="show_user()">
                             {{post.id}}
                         </td>
