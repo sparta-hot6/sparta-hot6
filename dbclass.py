@@ -37,8 +37,16 @@ class Get_db():
             #     login_confirm = "check your id"
 
         return [name, login_confirm]
-
-# input_id = "soo581"
+    def get_db_post():
+        db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
+        cursor = db.cursor(pymysql.cursors.DictCursor)
+        cursor.execute('USE hotsix;')
+        cursor.execute(f"SELECT * FROM post;")
+        post_db = cursor.fetchall()
+        db.commit()
+        db.close()
+        return post_db
+    # input_id = "soo581"
 # input_pw = "9811"
 
 # print(Get_db.login_confirm(input_id,input_pw))
