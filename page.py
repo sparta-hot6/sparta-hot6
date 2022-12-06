@@ -10,12 +10,6 @@ app.template_folder = "templates"
 
 # generating data for pagination - 페이지 매김을 위한 데이터 생성
 # users 부분을 mysql과 연동하면 될 듯
-def connect_db():
-    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
-    return db
-
-
-posts = Get_db.get_db_post()
 
 
 def get_posts(offset=0, per_page=10):
