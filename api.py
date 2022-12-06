@@ -41,15 +41,12 @@ def get_profile():
 
 @api.route('/profile', methods=['PUT'])
 def put_profile():
-    # if "PRIMARY_KEY_ID" not in session:
-    #     return 'none'
+    if "PRIMARY_KEY_ID" not in session:
+        return 'none'
     db = MySQL_connect()
     cursor = db.cursor()
-    user_id = 1 # session["PRIMARY_KEY_ID"]
+    user_id = session["PRIMARY_KEY_ID"]
     setquery = ''
-    name = None
-    pf_img = None
-    bg_img = None
     if 'pf_name' in request.form:
         name = request.form['pf_name']
         setquery = setquery + \
@@ -81,22 +78,81 @@ def download_files(filename):
 
 @api.route('/posts', methods=['GET'])
 def get_posts():
-    pass
+    db = MySQL_connect()
+    cursor = db.cursor(DictCursor)
+    sql = """
+    SELECT *
+    FROM post
+    """
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    db.close()
+    return data
 
 
 @api.route('/post', methods=['POST'])
 def write_post():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    text = request.form['text']
+    if 'img' in request.files:
+        img = upload_file(request.files['img'])
+    else:
+        img = ''
+    sql = f"""
+    INSERT INTO post (post_text, user_id, image)
+    VALUES ('{text}', {user_id}, '{img}')
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
 
 
 @api.route('/post', methods=['PUT'])
 def put_post():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    post_id = request.form['post_id']
+    text = request.form['text']
+    setquery = f"test = '{text}'"
+    if 'img' in request.files:
+        img = upload_file(request.files['img'])
+        setquery += f", image='{img}'"
+    sql = f"""
+    UPDATE post
+    SET {setquery}
+    WHERE id = {post_id}, user_id = {user_id}
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
 
 
 @api.route('/post', methods=['DELETE'])
 def delete_post():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    post_id = request.form['post_id']
+    sql = f"""
+    DELETE post
+    SET {setquery}
+    WHERE id = {post_id}, user_id = {user_id}
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
 
 
 @api.route('/comments', methods=['GET'])
