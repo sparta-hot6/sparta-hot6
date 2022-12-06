@@ -75,7 +75,7 @@ def logout():
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return render_template('signup.html'), logger.info('회원가입 페이지')
 
 @app.route('/profile')
 def profile():

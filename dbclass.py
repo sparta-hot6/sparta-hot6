@@ -3,7 +3,7 @@ import pymysql
 class Get_db():
 
     def get_db_user():
-        db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
+        db = pymysql.connect(host="localhost2", port=3306, user='root', passwd='gksehdwn123, db='hotsix', charset='utf8')
         cursor = db.cursor(pymysql.cursors.DictCursor) 
         cursor.execute('USE hotsix;') 
         # cursor.execute(f"SELECT login_id, password, name FROM user WHERE login_id = '{id}' and '{pw}'")
