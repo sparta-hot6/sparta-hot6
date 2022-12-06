@@ -5,6 +5,7 @@ import pymysql
 import logging
 import logging.handlers
 from dbclass import Get_db
+from api import api
 
 app = Flask(__name__)
 app.secret_key = "hoon"
@@ -77,6 +78,8 @@ def route():
     pass
 
 # ---- hoon -- 로그인 구역
+
+app.register_blueprint(api, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
