@@ -8,8 +8,8 @@ CREATE TABLE user
     name             varchar(30) UNIQUE NOT NULL,
     login_id         varchar(30) UNIQUE NOT NULL,
     password         varchar(30)        NOT NULL,
-    profile_image    LONGBLOB,
-    background_image LONGBLOB
+    profile_image    varchar(100),
+    background_image varchar(100)
 );
 
 CREATE TABLE post
@@ -17,7 +17,7 @@ CREATE TABLE post
     id        int PRIMARY KEY AUTO_INCREMENT,
     post_text varchar(30) NOT NULL,
     user_id   int,
-    image     LONGBLOB,
+    image     varchar(100),
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
