@@ -110,7 +110,7 @@ def put_post():
     user_id = session['PRIMARY_KEY_ID']
     post_id = request.form['post_id']
     text = request.form['text']
-    setquery = f"test = '{text}'"
+    setquery = f"post_text = '{text}'"
     if 'img' in request.files:
         img = upload_file(request.files['img'])
         setquery += f", image='{img}'"
