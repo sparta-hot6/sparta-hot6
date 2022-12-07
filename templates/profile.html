@@ -21,8 +21,8 @@
 <header>
     <h1>PROFILE PAGE</h1>
     <div>
-        <ul>HOME</ul>
-        <ul>LOGOUT</ul>
+        <button onclick = "location.href = '{{url_for('home')}}' " type='button'>HOME</button>
+        <button onclick = "location.href = '{{url_for('home')}}' " type='button'>LOGOUT</button>
     </div>
 </header>
 <section>
@@ -30,10 +30,8 @@
     <div class="profile">
         <img id="profile_img" src="/static/img/기본 이미지.jpg" alt="img">
         <h1 id="profile_name">한동주</h1>
-        <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="modal_btn">프로필 수정</button>
+        <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="profile_btn">프로필 수정</button>
     </div>
-
-    <!--모달창 시작-->
 
     <hr style="width:80%">
     <h2 style="margin-left:10%">내가 작성한 글</h2>
@@ -41,8 +39,6 @@
 <div class="container">
     <div class="feed">
         <h3 class="name">이름</h3>
-        <div class="date">날짜</div>
-        <a class="title">글 제목</a>
         <p class="content">글 내용</p>
         <div class="accessory">
             <img src="/static/img/ic_comment.jpg" width="16px"> Comments
@@ -50,8 +46,6 @@
     </div>
     <div class="feed">
         <h3 class="name">이름</h3>
-        <div class="date">날짜</div>
-        <a class="title">글 제목</a>
         <p class="content">글 내용</p>
         <div class="accessory">
             <img src="/static/img/ic_comment.jpg" width="16px"> Comments
@@ -59,8 +53,6 @@
     </div>
     <div class="feed">
         <h3 class="name">이름</h3>
-        <div class="date">날짜</div>
-        <a class="title">글 제목</a>
         <p class="content">글 내용</p>
         <div class="accessory">
             <img src="/static/img/ic_comment.jpg" width="16px"> Comments
