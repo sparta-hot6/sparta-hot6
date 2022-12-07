@@ -8,7 +8,7 @@ app = Flask(__name__)
 posts = dbfunction.get_posts_all()
 
 
-def get_posts(offset=0, per_page=5):
+def get_posts(offset=0, per_page=9):
     # 여기서 설정이 변경됨으로 나오는 페이지 관리가 되야하는데 안됨
     return posts[offset : offset+per_page]
 
