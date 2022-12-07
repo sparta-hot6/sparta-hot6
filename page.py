@@ -11,13 +11,12 @@ app.template_folder = "templates"
 # generating data for pagination - 페이지 매김을 위한 데이터 생성
 # users 부분을 mysql과 연동하면 될 듯
 posts = dbfunction.get_posts_all()
-
-
-def get_posts(offset=0, per_page=10):
+print(posts)
+def get_posts(offset, per_page):
     return posts[offset:offset + per_page]
 
 
-@app.route('/', methods=('GET',))
+@app.route('/')
 def index():
     #page 현재 페이지 번호, per_page 페이지당 보여줄 게시물 개수
     page, per_page, offset = get_page_args(page_parameter="page", per_page_parameter="per_page")
@@ -30,8 +29,6 @@ def index():
         page=page,
         per_page=per_page,
         pagination=pagination)
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
