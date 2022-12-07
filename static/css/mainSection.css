@@ -1,4 +1,4 @@
-.back_img {
+#back_img {
     height: 350px;
     width: 80%;
     display: block;
@@ -9,7 +9,7 @@
 .profile {
     display: flex;
 }
-.profile_img {
+#profile_img {
     position: relative;
     width : 150px;
     height: 150px;
@@ -18,12 +18,12 @@
     object-fit: cover;
 }
 
-.profile_name{
+#profile_name{
     margin : auto auto auto 10px;
     font-size: 30px;
     font-weight: bold;
 }
-#modal_btn {
+#profile_btn {
     height : 40px;
     margin-right: 10%;
     margin-top : 10%;
