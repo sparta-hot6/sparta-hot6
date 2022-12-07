@@ -9,7 +9,7 @@
         justify-content: space-between;
         margin : 10px;
     }
-    .profile_img_update{
+    #profile_img_update{
         position: relative;
         width : 150px;
         height: 150px;
@@ -17,7 +17,7 @@
         margin : 10px 0 50px 10px;
         object-fit: cover;
     }
-    .back_img_update {
+    #back_img_update {
         height: 200px;
         width: 80%;
         display: block;
