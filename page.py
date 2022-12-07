@@ -8,8 +8,6 @@ app = Flask(__name__)
 app.template_folder = "templates"
 
 
-# generating data for pagination - 페이지 매김을 위한 데이터 생성
-# users 부분을 mysql과 연동하면 될 듯
 posts = dbfunction.get_posts_all()
 print(posts)
 def get_posts(offset, per_page):
