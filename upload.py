@@ -8,18 +8,20 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 def allowed_file(filename):
-    return True # 임시
+    return True  # 임시
     # return '.' in filename and \
     #     filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def create_time_filename(filename):
-    ext = filename.rsplit('.', 1)[1]
-    timestr = strftime("%Y%m%d-%H%M%S")
+    [original, ext] = filename.rsplit('.', 1)
+    timestr = strftime("%Y%m%d-%H%M%S") + original
     return '.'.join([timestr, ext])
 
 
 def upload_file(file):
+    if os.path.isdir(UPLOAD_FOLDER) == False:
+        os.mkdir(UPLOAD_FOLDER)
     if file and allowed_file(file.filename):
         filename = secure_filename(create_time_filename(file.filename))
         file.save(os.path.join(UPLOAD_FOLDER, filename))

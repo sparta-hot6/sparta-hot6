@@ -110,7 +110,7 @@ def put_post():
     user_id = session['PRIMARY_KEY_ID']
     post_id = request.form['post_id']
     text = request.form['text']
-    setquery = f"test = '{text}'"
+    setquery = f"post_text = '{text}'"
     if 'img' in request.files:
         img = upload_file(request.files['img'])
         setquery += f", image='{img}'"
@@ -144,21 +144,75 @@ def delete_post():
     return 'success'
 
 
-@api.route('/comments', methods=['GET'])
-def get_comments():
-    pass
+@api.route('/comments/<post_id>', methods=['GET'])
+def get_comments(post_id):
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor(DictCursor)
+    sql = f"""
+    SELECT * FROM comment WHERE post_id = {post_id}
+    """
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    db.close()
+    return data
 
 
 @api.route('/comment', methods=['POST'])
 def write_comment():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    post_id = request.form['post_id']
+    text = request.form['text']
+    sql = f"""
+    INSERT INTO comment (user_id, text, post_id)
+    VALUES ({user_id}, '{text}', {post_id})
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
 
 
 @api.route('/comment', methods=['PUT'])
 def put_comment():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    post_id = request.form['post_id']
+    comment_id = request.form['id']
+    text = request.form['text']
+    sql = f"""
+    UPDATE comment
+    SET text = '{text}'
+    WHERE id = {comment_id}, post_id = {post_id}, user_id = {user_id}
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
 
 
 @api.route('/comment', methods=['DELETE'])
 def delete_comment():
-    pass
+    if 'PRIMARY_KEY_ID' not in session:
+        return 'none'
+    db = MySQL_connect()
+    cursor = db.cursor()
+    user_id = session['PRIMARY_KEY_ID']
+    comment_id = request.form['comment_id']
+    sql = f"""
+    DELETE
+    FROM comment
+    WHERE id = {comment_id}, user_id = {user_id}
+    """
+    cursor.execute(sql)
+    db.commit()
+    db.close()
+    return 'success'
