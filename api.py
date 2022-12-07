@@ -30,11 +30,11 @@ def get_profile():
 
 @api.route('/profile', methods=['PUT'])
 def put_profile():
-    # if "PRIMARY_KEY_ID" not in session:
-    #     return 'none'
+    if "PRIMARY_KEY_ID" not in session:
+        return 'none'
     db = MySQL_connect()
     cursor = db.cursor()
-    user_id = 1 # session["PRIMARY_KEY_ID"]
+    user_id = session["PRIMARY_KEY_ID"]
     setquery = ''
     if 'pf_name' in request.form:
         name = request.form['pf_name']
