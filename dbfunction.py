@@ -1,3 +1,5 @@
+import logging
+
 import pymysql
 import config
 
@@ -59,7 +61,9 @@ def get_posts_all():
 
     db.commit()
     db.close()
+
     return posts_all
+
 #------------------------------실행 예시-------------------------------
 # input_id= 'jmoon581'
 # input_pw= '930523'

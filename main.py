@@ -3,7 +3,7 @@ import requests
 import pymysql
 import logging
 import logging.handlers
-
+from api import api
 
 import dbfunction # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
@@ -29,13 +29,7 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 logger.addHandler(fileHandler)
 
-# 패스워드는 각자 다를 것이니 수정해서 사용할 것. (passwd='자기비밀번호')
-# 라우트 내부에서 db = connect_db() 형식으로 이용.
-def connect_db():
-    db = pymysql.connect(host="localhost", port=3306, user='root', passwd='gks1004*', db='hotsix', charset='utf8')
-    return db
-
-# ---- home -- 뉴스피드 구역 ---------------------------------------------------------------
+# ---- home -- 뉴스 피드 구역 ---------------------------------------------------------------
 @app.route('/')
 def home():
     # PRIMARY_KEY_ID = 로그인한 유저의 고유번호 입니다.
@@ -95,6 +89,8 @@ def route():
 
 
 
+
+app.register_blueprint(api, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
