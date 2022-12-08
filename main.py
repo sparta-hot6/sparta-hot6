@@ -5,6 +5,7 @@ import logging
 import logging.handlers
 from dbclass import Get_db
 from api import api
+from pymysql.cursors import DictCursor
 
 import dbfunction  # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
@@ -37,7 +38,8 @@ logger.addHandler(fileHandler)
 
 def connect_db():
     db = pymysql.connect(host="localhost", port=3306, user='root',
-                         passwd='sparta', db='hotsix', charset='utf8')
+                         passwd='sparta', db='hotsix', charset='utf8',
+                         cursorclass=pymysql.cursors.DictCursor)
     return db
 
 # ---- home -- 뉴스피드 구역 ---------------------------------------------------------------
@@ -94,9 +96,15 @@ def signup():
     return render_template('signup.html'), logger.info('회원가입 페이지')
 
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
+@app.route("/profile/<id>", methods=['GET'])
+def profile(id):
+    curs = connect_db().cursor()
+    sql = f"select * from post where id = {id}"
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    print(rows)
+    return render_template("profile.html", data=rows)
 
 
 @app.route('/profileupdate')

@@ -4,7 +4,7 @@ import pymysql
 class Get_db():
 
     def get_db_user():
-        db = pymysql.connect(host="localhost2", port=3306, user='root', passwd='sparta', db='hotsix', charset='utf8')
+        db = pymysql.connect(host="localhost2", port=3306, user='root', passwd='gksehdwn123', db='hotsix', charset='utf8')
         cursor = db.cursor(pymysql.cursors.DictCursor)
         cursor.execute('USE hotsix;')
 
