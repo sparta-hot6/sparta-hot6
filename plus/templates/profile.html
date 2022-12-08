@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/header.css">
+<link rel="stylesheet" type="text/css" href="/static/css/mainSection.css">
+<link rel="stylesheet" type="text/css" href="/static/css/feed.css">
+{% endblock style %}
+{% block header %}
+<h1>PROFILE PAGE</h1>
+<div>
+    <button onclick = "location.href = '{{url_for('home')}}' " type='button'>HOME</button>
+</div>
+{% endblock header %}
+{% block main %}
+<section>
+  <img id="back_img" src="{{ url_for('static', filename="img/배경예시.jpg")}}" alt="img">
+  <div class="profile">
+      <img id="profile_img" src="{{ url_for('static', filename="img/기본 이미지.jpg")}}" alt="img">
+      <h1 id="profile_name">${name}</h1>
+      <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="profile_btn">프로필 수정</button>
+  </div>
+
+  <hr style="width:80%">
+  <h2 style="margin-left:10%">내가 작성한 글</h2>
+</section>
+<div class="container">
+  <div class="feed">
+      <h3 class="name">이름</h3>
+      <p class="content">글 내용</p>
+      <div class="accessory">
+          <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+      </div>
+  </div>
+  <div class="feed">
+      <h3 class="name">이름</h3>
+      <p class="content">글 내용</p>
+      <div class="accessory">
+          <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+      </div>
+  </div>
+  <div class="feed">
+      <h3 class="name">이름</h3>
+      <p class="content">글 내용</p>
+      <div class="accessory">
+          <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+      </div>
+  </div>
+</div>
+{% endblock main %}
+{% block script %}
+<script type="text/javascript" src="/static/js/script.js"></script>
+{% endblock script %}
