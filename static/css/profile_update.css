@@ -1,0 +1,31 @@
+.profile_update_top {
+        text-align: center;
+        font-weight: bold;
+        margin : 20px auto 20px auto;
+        border-bottom : 1px solid black;
+    }
+    .profile_update {
+        display: flex;
+        justify-content: space-between;
+        margin : 10px;
+    }
+    #profile_img_update{
+        position: relative;
+        width : 150px;
+        height: 150px;
+        border-radius: 70%;
+        margin : 10px 0 50px 10px;
+        object-fit: cover;
+    }
+    #back_img_update {
+        height: 200px;
+        width: 80%;
+        display: block;
+        margin : 3px auto;
+        border-radius: 20px;
+        opacity: 0.8;
+    }
+
+.file-input {
+  display: none;
+}

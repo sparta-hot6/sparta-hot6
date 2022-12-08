@@ -15,7 +15,7 @@ def allowed_file(filename):
 
 def create_time_filename(filename):
     [original, ext] = filename.rsplit('.', 1)
-    timestr = strftime("%Y%m%d-%H%M%S") + original
+    timestr = strftime("%Y%m%d-%H%M%S") + '-' + original
     return '.'.join([timestr, ext])
 
 
