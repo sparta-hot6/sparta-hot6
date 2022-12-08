@@ -26,7 +26,8 @@ def index():
     pagination = Pagination(page=page,
                             per_pagee=per_page,
                             total=total,
-                            css_framework='bulma')
+                            css_framework='bootstrap4',
+                            )
     return render_template(
         'hot6.html',
         posts=pagination_posts,
