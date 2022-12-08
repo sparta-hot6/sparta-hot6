@@ -43,6 +43,7 @@ def get_posts(offset=0, per_page=10):
 def home():
     page, per_page, offset = get_page_args(page_parameter="page",
                                            per_page_parameter="per_page")
+    
     total = len(posts)
     pagination_posts = get_posts(offset=offset, per_page=per_page)
     pagination = Pagination(page=page,

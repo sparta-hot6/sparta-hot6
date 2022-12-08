@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/feed.css')}}">
+{% endblock style %}
 {% block main %}
-<h1 id="home">뉴스피드 홈 화면 입니다.</h1>
+  <div class="container">
+    {% for post in posts %}
+      <div class="feed">
+          <h3 class="name">{{post.name}}</h3>
+          <p class="content">{{post.post_text}}</p>
+          <div class="accessory">
+              <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+          </div>
+      </div>
+    {% endfor %}
+    {{pagination.links}}
+  </div>
+  <div class="page-list">
+  </div>
 {% endblock main %}
