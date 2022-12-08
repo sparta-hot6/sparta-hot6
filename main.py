@@ -2,6 +2,7 @@ from flask import url_for, session, Flask, render_template , request , redirect,
 import requests
 import pymysql
 import logging
+from flask_paginate import Pagination, get_page_args
 import logging.handlers
 from api import api
 
@@ -31,14 +32,41 @@ fileHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 logger.addHandler(fileHandler)
 
+#페이지네이션 관련 함수
+posts = dbfunction.get_posts_all()
+def get_posts(offset=0, per_page=10):
+    # 여기서 설정이 변경됨으로 나오는 페이지 관리가 되야하는데 안됨
+    return posts[offset : offset+per_page]
+
 # ---- home -- 뉴스 피드 구역 ---------------------------------------------------------------
 @app.route('/')
 def home():
+    page, per_page, offset = get_page_args(page_parameter="page",
+                                           per_page_parameter="per_page")
+    total = len(posts)
+    pagination_posts = get_posts(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page,
+                            per_pagee=per_page,
+                            total=total,
+                            css_framework='bootstrap5')
     # PRIMARY_KEY_ID = 로그인한 유저의 고유번호 입니다.
     if "PRIMARY_KEY_ID" in session:
-        return render_template("index.html", user_name = session.get("login_name"), login = True)
+        return render_template("index.html",
+                               user_name = session.get("login_name"),
+                               login = True,
+                               posts=pagination_posts,
+                               page=page,
+                               per_page=per_page,
+                               pagination=pagination,
+                               )
     else:
-        return render_template("index.html", login = False)
+        return render_template("index.html",
+                               login = False,
+                               posts=pagination_posts,
+                               page=page,
+                               per_page=per_page,
+                               pagination=pagination,
+                               )
     
 
 # ---- login -- 로그인 구역 -----------------------------------------------------------------
