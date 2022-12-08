@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+ font-family: 'Nerko One';
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkred;
+  padding: 8px 12px;
+}
+
+.navbar_logo { 
+  font-size: 33px;
+  color: white;
+}
+
+.navbar_logo i {
+  color: lightcoral;
+}
+
+.navbar_menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_menu li {
+  padding: 8px 40px;
+}
+
+.navbar_menu li:hover {
+  background-color: #af5252;
+  border-radius: 4px;
+}
+.navbar_sign {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_sign li {
+  padding: 8px 15px;
+}
+
+.navbar_sign li:hover {
+  background-color: #af5252;
+  border-radius: 4px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.post{
+  width: 500px;
+  height: auto;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  margin-top: 40px;
+}
+
+.info{
+  width: 500px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.info .username{
+  width: auto;
+  font-weight: bold;
+  color: #000;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.info .options{
+  height: 10px;
+  cursor: pointer;
+}
+
+.info .user{
+  display: flex;
+  align-items: center;
+}
+
+.info .profile-pic{
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  background: none;
+}
+
+.info .profile-pic img{
+  border: none;
+}
+
+.post-image{
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.post-content{
+  width: 500px;
+  padding: 20px;
+}
+
+.likes{
+  font-weight: bold;
+}
+
+.description{
+  width: 500px;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+.post-time{
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+}
+
+.comment-wrapper{
+  width: 500px;
+  height: 50px;
+  border-radius: 1px solid #dfdfdf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-wrapper .icon{
+  height: 30px;
+}
+
+.comment-box{
+  width: 80%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}

@@ -56,7 +56,7 @@ def get_posts_all():
     cursor = db.cursor(pymysql.cursors.DictCursor)
     cursor.execute('USE hotsix;')
 
-    cursor.execute(f'SELECT * FROM post')
+    cursor.execute(f'SELECT * FROM post as p left join `user` as u on p.user_id = u.id')
     posts_all = cursor.fetchall()
 
     db.commit()
