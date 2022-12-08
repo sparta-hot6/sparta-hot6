@@ -1,0 +1,62 @@
+#back_img {
+  height: 350px;
+  width: 80%;
+  display: block;
+  margin : 3px auto;
+  border-radius: 20px;
+  opacity: 0.8;
+}
+.profile {
+  display: flex;
+}
+#profile_img {
+  position: relative;
+  width : 150px;
+  height: 150px;
+  border-radius: 70%;
+  margin : 10px 0 20px 10%;
+  object-fit: cover;
+}
+
+#profile_name{
+  margin : auto auto auto 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+#profile_btn {
+  height : 40px;
+  margin-right: 10%;
+  margin-top : 10%;
+}
+
+/* 피드 */
+
+.container{
+  width : 80%;
+  margin : auto;
+}
+.feed {
+  background-color: ghostwhite;
+  padding : 10px;
+  margin-top : 15px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 3px 2px gray;
+}
+.date {
+  color: #999;
+  margin-bottom: 10px;
+}
+.name {
+  color: #6184dddd;
+  font-weight: 600;
+}
+.content {
+  margin-top: 5px;
+}
+.accessory {
+  border-top: 1px solid #eee;
+  padding-top:10px;
+  margin-top:10px;
+  color: #999;
+  font-size: 14px;
+}

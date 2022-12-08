@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block style %}
-  <link rel="stylesheet" type="text/css" href="/static/css/profile_update.css">
+  <link href="{{url_for('static', filename="styles/profile_update.css")}}" rel="stylesheet" type="text/css">
 {% endblock style %}
-{% block header %}{% endblock header %}
 {% block main %}
   <div class="profile_update_top">
     <h1>프로필 수정</h1>

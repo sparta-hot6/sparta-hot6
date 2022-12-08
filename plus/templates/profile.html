@@ -1,16 +1,7 @@
 {% extends 'base.html' %}
 {% block style %}
-<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/static/css/header.css">
-<link rel="stylesheet" type="text/css" href="/static/css/mainSection.css">
-<link rel="stylesheet" type="text/css" href="/static/css/feed.css">
+<link href="{{url_for('static', filename="styles/profile.css")}}" rel="stylesheet" type="text/css">
 {% endblock style %}
-{% block header %}
-<h1>PROFILE PAGE</h1>
-<div>
-    <button onclick = "location.href = '{{url_for('home')}}' " type='button'>HOME</button>
-</div>
-{% endblock header %}
 {% block main %}
 <section>
   <img id="back_img" src="{{ url_for('static', filename="img/배경예시.jpg")}}" alt="img">
