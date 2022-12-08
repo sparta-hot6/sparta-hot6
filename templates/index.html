@@ -28,7 +28,7 @@
 {% block header %}
 <p id="loginTrue">{{user_name}}</p>
 <div id="loginoutBox">
-    <a href= {{ url_for("login") }} id="loginBox"><button onclick="">로그인</button></a>
+    <a id="loginBox"><button onclick="window.location.href='{{ url_for("login") }}'">로그인</button></a>
     <!-- <a href= {{ url_for("logout") }} id="logoutBox"><button>로그아웃</button></a> -->
 </div>
 {% endblock header %}
@@ -38,9 +38,9 @@
 {% block script %}
 <script>
   const loginTrue = document.querySelector("#loginTrue").innerText
-  const loginBoxTemp = `<a href= {{ url_for("login") }} id="loginBox"><button>로그인</button></a>`
-  const logoutBoxTemp = `<a href= {{ url_for("logout") }} id="logoutBox"><button>로그아웃</button></a>`
-  const profileBoxTemp = `<a href= {{ url_for("profile") }} id="logoutBox"><button>내 프로필</button></a>`
+  const loginBoxTemp = `<button onclick="window.location.href = '{{ url_for("login") }}'">로그인</button>`
+  const logoutBoxTemp = `<button onclick="window.location.href = '{{ url_for("logout") }}'">로그아웃</button>`
+  const profileBoxTemp = `<button onclick="window.location.href = '{{ url_for("profile") }}'">내 프로필</button>`
   
   if (Boolean(loginTrue) == true){
       $('#loginoutBox').empty()
