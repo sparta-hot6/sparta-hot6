@@ -14,7 +14,6 @@ import dbfunction  # db를 다루는 함수를 만들어서 가져다 씁시다.
 app = Flask(__name__)
 app.secret_key = "hotsix_secret_key"
 
-
 # ---- logging -- 로그 구역 ----------------------------------------------------------------
 # 로그 생성
 logger = logging.getLogger('hotsix')
@@ -155,7 +154,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.clear()                # 로그아웃 버튼을 누르면 모든 세션이 제거됩니다.
+    session.clear()  # 로그아웃 버튼을 누르면 모든 세션이 제거됩니다.
     return redirect(url_for("home")), logger.info('로그아웃'), info_logger.info('로그아웃')
 
 
@@ -166,7 +165,7 @@ def signup():
     if "PRIMARY_KEY_ID" in session:
         return render_template("index.html", user_name=session.get("login_name"), login=True), logger.info(
             '로그인 상태'), info_logger.info('로그인 상태')
-# ----------------------------------------------------------------------  -------------------
+    # ----------------------------------------------------------------------  -------------------
     already_name_msg = ''
     already_id_msg = ''
     # POST 요청이 왔을때만 if문이 실행됩니다.
@@ -187,8 +186,9 @@ def signup():
         elif input_name == "":
             return render_template('signup.html', confirm_name_msg="이름을 입력해주세요", input_id=input_id)
         elif input_pw == "":
-            return render_template('signup.html', confirm_pw_msg="비밀번호를 입력해주세요", input_name=input_name, input_id=input_id)
-# ----------------------------------------------------------------------
+            return render_template('signup.html', confirm_pw_msg="비밀번호를 입력해주세요", input_name=input_name,
+                                   input_id=input_id)
+        # ----------------------------------------------------------------------
         # 이미 회원가입이 되어있는 아이디인지 체크합니다.
         already_exists_name = dbfunction.already_exists_id_name(
             input_name, 'name')
@@ -198,12 +198,14 @@ def signup():
         # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
         if already_exists_name != None:
             already_name_msg = f'{input_name}은 이미 가입된 이름입니다 다른 이름, 혹은 닉네임으로 입력해주세요.'
-            return render_template('signup.html', already_name_msg=already_name_msg, input_name=input_name, input_id=input_id)
+            return render_template('signup.html', already_name_msg=already_name_msg, input_name=input_name,
+                                   input_id=input_id)
 
         elif already_exists_id != None:
             already_id_msg = f'{input_id}은 이미 가입된 ID 입니다.'
-            return render_template('signup.html', already_id_msg=already_id_msg, input_name=input_name, input_id=input_id)
-# ----------------------------------------------------------------------
+            return render_template('signup.html', already_id_msg=already_id_msg, input_name=input_name,
+                                   input_id=input_id)
+        # ----------------------------------------------------------------------
 
         # 3가지 모두 True가 아니면 넘어가지 않습니다.
         if confirm_id is not True:
@@ -228,7 +230,7 @@ def signup():
             # ----------------------------------------------------------------------
             return render_template('signup.html', confirm_pw_msg=confirm_pw, input_name=input_name, input_id=input_id)
 
-        if already_exists_name == None and already_exists_id == None:               # 위의 유효성 검사를 통과한 입력값이 있을시 통과
+        if already_exists_name == None and already_exists_id == None:  # 위의 유효성 검사를 통과한 입력값이 있을시 통과
             # MySQL 데이터베이스에 새로운 사용자를 추가 하고 회원가입 메시지를 반환합니다.
             dbfunction.save_user_info(input_name, input_id, input_pw)
             # 회원가입 성공 페이지로 이동합니다.
@@ -262,10 +264,11 @@ def signupsucceded():
     return render_template("signupsucceded.html"), logger.info('가입 완료 페이지'), info_logger.info('가입 완료 페이지')
 
 
-@app.route("/withdrawal")                           # 회원탈퇴 는 구현할 시간이 없네요.
+@app.route("/withdrawal")  # 회원탈퇴 는 구현할 시간이 없네요.
 def withdrawal():
     if "PRIMARY_KEY_ID" in session:
         return render_template("index.html", user_name=session.get("login_name"), login=True)
+
 
 # ---- login -- 로그인 구역 ----------------------------------------------------------------
 
