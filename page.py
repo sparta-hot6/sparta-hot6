@@ -15,7 +15,6 @@ def get_posts(page,offset=0, per_page=5):
 
 @app.route('/', methods=('GET',))
 def index():
-
     page, per_page, offset = get_page_args(page_parameter="page",
                                            per_page_parameter="per_page")
     total = len(posts)
@@ -29,11 +28,16 @@ def index():
                             css_framework='bootstrap4',
                             )
     return render_template(
-        'hot6.html',
-        posts=pagination_posts,
-        page=page,
-        per_page=per_page,
-        pagination=pagination,)
+            'hot6.html',
+            posts=pagination_posts,
+            page=page,
+            per_page=per_page,
+            pagination=pagination,)
+
+@app.route('/numbers', methods=('GET',))
+def number():
+    return posts
+
 
 
 if __name__ == "__main__":

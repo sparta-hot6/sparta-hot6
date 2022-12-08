@@ -15,8 +15,10 @@ app.secret_key = "hotsix_secret_key"
 
 # 로그 생성
 logger = logging.getLogger('hotsix')
+info_logger = logging.getLogger('work')
 # 로그의 출력 기준 설정
 logger.setLevel(logging.DEBUG)
+info_logger.setLevel(logging.INFO)
 # log 출력 형식
 formatter = logging.Formatter('[%(asctime)s][%(levelname)s|%(filename)s:%(lineno)s] >> %(message)s')
 # handler 생성
@@ -30,7 +32,7 @@ streamHandler.setFormatter(formatter)
 fileHandler.setFormatter(formatter)
 # logger instance에 handler 설정
 logger.addHandler(streamHandler)
-logger.addHandler(fileHandler)
+info_logger.addHandler(fileHandler)
 
 #페이지네이션 관련 함수
 posts = dbfunction.get_posts_all()
