@@ -11,7 +11,7 @@ from loginfunctions import confirm_name_id_pw
 import string
 import dbfunction  # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='./templates', static_folder='./static')
 app.secret_key = "hotsix_secret_key"
 
 # ---- logging -- 로그 구역 ----------------------------------------------------------------
@@ -251,12 +251,14 @@ def profile():
 
     rows = curs.fetchall()
     print(rows)
-    return render_template("profile.html", data=rows)
+    return render_template("profile.html", login=True, data=rows)
 
 
 @app.route('/profileupdate')
 def profile_update():
-    return render_template('profile_update.html')
+    if "PRIMARY_KEY_ID" not in session:
+        return redirect(url_for('home'))
+    return render_template('profile_update.html', login=True)
 
 
 @app.route("/signupsucceded")  # 회원가입 완료

@@ -1,73 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.수5.0.js"></script>
-    <link href="./bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-</head>
-<body>
-<style>
-    body {
-        color: whitesmoke;
-        background-color: rgb(33, 37, 41);
-    }
-
-    #loginTrue {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end
-    }
-
-    #loginoutBox {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end
-    }
-
-    #home {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-
-
-<div id>
-    <p id="loginTrue">{{user_name}}</p>
-
-    <div id="loginoutBox">
-        <a href={{ url_for("login") }} id="loginBox">
-        <button onclick="">로그인</button>
-        </a>
+{% extends 'base.html' %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/feed.css')}}">
+{% endblock style %}
+{% block main %}
+<div class="container">
+    {% for post in posts %}
+    <div class="feed">
+        <h3 class="name">{{post.name}}</h3>
+        <p class="content">{{post.post_text}}</p>
+        <div class="accessory">
+            <img src="{{url_for('static', filename='img/ic_comment.jpg')}}" width="16px"> Comments
+        </div>
     </div>
+    {% endfor %}
+    {{pagination.links}}
 </div>
-
-
-<h1 id="home">뉴스피드 홈 화면 입니다.</h1>
-
-<script>
-    const loginTrue = document.querySelector("#loginTrue").innerText
-    const loginBoxTemp = `<a href= {{ url_for("login") }} id="loginBox"><button>로그인</button></a>`
-    const logoutBoxTemp = `<a href= {{ url_for("logout") }} id="logoutBox"><button>로그아웃</button></a>`
-    const profileBoxTemp = `<a href= {{ url_for("profile") }} id="logoutBox"><button>내 프로필</button></a>`
-
-    if (Boolean(loginTrue) == true) {
-        $('#loginoutBox').empty()
-        $('#loginoutBox').append(logoutBoxTemp)
-        $('#loginoutBox').append(profileBoxTemp)
-        console.log('login succeed')
-    } else if (Boolean(loginTrue) == false) {
-        $('#loginoutBox').empty()
-        $('#loginoutBox').append(loginBoxTemp)
-        console.log('logout succeed')
-    }
-</script>
-</body>
-</html>
+<div class="page-list">
+</div>
+{% endblock main %}

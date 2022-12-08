@@ -1,0 +1,23 @@
+main {
+    color: whitesmoke;
+    background-color: rgb(33, 37, 41);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.backlogin {
+    margin-top: 5%;
+}
+
+.form-floating1 {
+    margin-top: 15px;
+    color: black;
+}
+
+.form-floating2 {
+    color: black;
+}
