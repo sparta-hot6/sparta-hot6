@@ -29,7 +29,7 @@
     }
 
     .signup {
-        margin-top: 5%;
+        margin-top: 11px;
     }
 
     .form-floating1 {
@@ -41,10 +41,41 @@
         color: black;
     }
 
+    #homeimage{
+        width: 40%;
+        margin-bottom: 2%;
+    }
+
+    #homeimage{
+        transition: all 0.2s linear;
+    }
+    #homeimage:hover{
+        transform: scale(1.1);
+    }
+
+    a:link {
+    color : rgb(255, 255, 255);
+    text-decoration: none;
+    }
+    a:visited {
+        color : rgb(255, 255, 255);
+        text-decoration: none;
+    }
+    a:hover {
+        color : rgb(255, 170, 0);
+        /* text-decoration: underline; */
+    }
+    a:active {
+        color : rgb(107, 118, 240);
+        text-decoration: none;
+    }
+    #login_confirm {
+        margin: 0px;
+    }
 </style>
 
 <body>
-    <a href="{{ url_for('home')}}">home</a>
+    <a href="{{ url_for('home')}}"><img id="homeimage" src="static\image\free-icon-fire-1211048.png"></a>
     <form onsubmit="return handleSubmit()" method="POST" id="login" action="{{url_for('login')}}">
         <h1>Please login</h1>
         <div class="form-floating1">
@@ -60,9 +91,11 @@
         <a href="{{ url_for('signup')}}">
             <p class="signup">Sign Up</p>
         </a>
-        <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
+        
     </form>
         <p id="login_confirm">{{login_confirm}}</p>
+
+        <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
 
 </body>
 

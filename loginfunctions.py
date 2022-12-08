@@ -13,7 +13,7 @@ class confirm_name_id_pw():
             return "Name은 2자 이상 20자 이하로 입력 가능합니다."   
 
         elif completed_Korean != True:
-            return "Name을 한글로 완성된 문자로 입력해 주세요."
+            return "Name을 한글로 완성된 문자를 입력해 주세요."
 
         else:
             return True

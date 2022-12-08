@@ -28,17 +28,53 @@
         text-align: center;
     }
     #loginbutton{
+        margin-top: 5%;
         color: whitesmoke;
     }
 
+    #homeimage{
+        width: 60%;
+        margin-bottom: 6%;
+    }
+
+    #homeimage{
+        transition: all 0.2s linear;
+    }
+    #homeimage:hover{
+        transform: scale(1.1);
+    }
+
+    a:link {
+    color : rgb(255, 255, 255);
+    text-decoration: none;
+    }
+    a:visited {
+        color : rgb(255, 255, 255);
+        text-decoration: none;
+    }
+    a:hover {
+        color : rgb(255, 170, 0);
+        /* text-decoration: underline; */
+    }
+    a:active {
+        color : rgb(107, 118, 240);
+        text-decoration: none;
+    }
+    #login_confirm {
+        margin: 0px;
+    }
+
+    #loginbutton {
+        margin-top: 20%;
+        margin-bottom: 15%;
+    }
 </style>
 
     <body>
+        <a href="{{ url_for('home')}}"><img id="homeimage" src="static\image\free-icon-fire-1211048.png"></a>
         <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
-        <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
         <form action="{{url_for('login')}}">
         <button class="w-100 btn btn-lg btn-primary" id="loginbutton">로그인 하러가기</button>
         </fozrm>
     </body>
-
 </html>
