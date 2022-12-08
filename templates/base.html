@@ -12,7 +12,9 @@
   {% block style %}{% endblock style %}
 </head>
 <body>
-  <header>헤더</header>
+  <header>
+    {% block header %}헤더{% endblock header %}
+  </header>
   <main>
     {% block main %}{% endblock main %}
   </main>

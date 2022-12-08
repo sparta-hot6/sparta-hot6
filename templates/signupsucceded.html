@@ -1,22 +1,7 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="./bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-    <title>signupsucceded</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
-</head>
-<style>
+{% extends 'base.html' %}
+{% block style %}
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <style>
     body {
         color: whitesmoke;
         background-color: rgb(33, 37, 41);
@@ -29,14 +14,12 @@
     }
 
 
-</style>
-
-<body>
-    <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
-    <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
-    <button>
-        <a href="{{url_for('login')}}">로그인 하러가기</a>
-    </button>
-</body>
-
-</html>
+  </style>
+{% endblock style %}
+{% block main %}
+  <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
+  <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
+  <button>
+      <a href="{{url_for('login')}}">로그인 하러가기</a>
+  </button>
+{% endblock main %}
