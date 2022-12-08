@@ -1,59 +1,29 @@
 {% extends 'base.html' %}
 {% block style %}
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<style>
-    
-  body {
-      color: whitesmoke;
-      background-color: rgb(33, 37, 41);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-  }
-
-  .backlogin {
-      margin-top: 5%;
-  }
-
-  .form-floating1 {
-      margin-top: 15px;
-      color: black;
-  }
-
-  .form-floating2 {
-      color: black;
-  }
-</style>
+<link href="{{url_for('static', filename="styles/signup.css")}}" rel="stylesheet" type="text/css">
 {% endblock style %}
-{% block header %}{% endblock header %}
 {% block main %}
-  <a href="{{url_for('home')}}">home</a>
 
   <form id="signupForm" method="POST" action="{{url_for('signup')}}">
-  <h1>Please Sign Up</h1>
-  <div class="form-floating1">
-      <input type="id" class="form-control" id="signupid" name="signup_input_id" placeholder="Make ID" maxlength="20">
-      <label for="floatingInput"></label>
-      <input type="id" class="form-control" id="signupname" name="signup_input_name" placeholder="Your name" maxlength="20">
-      <label for="floatingInput"></label>
-  </div>
+    <h1>Please Sign Up</h1>
+    <div class="form-control-container top">
+        <input type="id" class="form-control" id="id" name="id" placeholder="Make ID" maxlength="20">
+        <label for="id"></label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Your name" maxlength="20">
+        <label for="name"></label>
+    </div>
 
-  <div class="form-floating2">
-      <input type="password" class="form-control" id="signuppw" name="signup_input_pw" placeholder="Make Password" maxlength="20">
-      <label for="floatingPassword"></label>
-      <!-- <input type="password" class="form-control" id="floatingPassword" name="signup_confirm_pw" placeholder="Confirm Password">
-      <label for="floatingPassword"></label> -->
-  </div>
+    <div class="form-control-container">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Make Password" maxlength="20">
+        <label for="password"></label>
+        <!-- <input type="password" class="form-control" id="floatingPassword" name="signup_confirm_pw" placeholder="Confirm Password">
+        <label for="floatingPassword"></label> -->
+    </div>
 
-  <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
   </form>
 
-  <a href="{{ url_for('login') }}">
-      <p class="backlogin">Back Login</p>
-  </a>
   <p class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
 
   <div id="confirm_id_msg">{{confirm_id_msg}}</div>

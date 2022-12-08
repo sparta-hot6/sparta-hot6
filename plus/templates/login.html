@@ -1,46 +1,21 @@
 {% extends 'base.html' %}
 {% block style %}
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-<style>
-  body {
-      color: whitesmoke;
-      background-color: rgb(33, 37, 41);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-  }
-
-  .signup {
-      margin-top: 5%;
-  }
-
-  .form-floating1 {
-      margin-top: 15px;
-      color: black;
-  }
-
-  .form-floating2 {
-      color: black;
-  }
-</style>
+<link href="{{url_for('static', filename="styles/login.css")}}" rel="stylesheet" type="text/css">
 {% endblock style %}
-{% block header %}{% endblock header %}
 {% block main %}
   <a href="{{ url_for('home')}}">home</a>
   <!-- form method="POST" 에  methods  s 를 붙이면 안된다... 이것때문에 4시간 날렷습니다.-->
-  <form method="POST" id="login" action="{{url_for("login")}}">
+  <form method="POST" id="login-form" action="{{url_for("login")}}">
       <h1>Please login</h1>
-      <div class="form-floating1">
-          <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID">
-          <label for="floatingInput"></label>
+      <div class="top form-control-container">
+          <input type="id" class="form-control" id="id" name="id" placeholder="ID">
+          <label for="id"></label>
       </div>
-      <div class="form-floating2">
-          <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+      <div class="form-control-container">
+          <input type="password" class="form-control" id="password" name="password"
               placeholder="Password">
-          <label for="floatingPassword"></label>
+          <label for="password"></label>
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
       <a href="{{ url_for('signup')}}">
@@ -50,4 +25,3 @@
   </form>
       <div id="login_confirm">{{login_confirm}}</div>
 {% endblock main %}
-{% block script %}{% endblock script %}

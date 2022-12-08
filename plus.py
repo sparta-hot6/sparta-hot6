@@ -53,9 +53,9 @@ def login():
     login_confirm = ''
     if request.method == 'POST':
         # login 화면에서 input받은 값을 가져옵니다.
-        input_id = request.form['floatingInput']
+        input_id = request.form['id']
         # login 화면에서 input받은 값을 가져옵니다.
-        input_pw = request.form['floatingPassword']
+        input_pw = request.form['password']
         print(input_id, input_pw)
         # input값들이 db에 있는지 체크 없다면 None 입니다.
         login_info = dbfunction.get_user_table(input_id, input_pw)
@@ -96,9 +96,9 @@ def signup():
     already_id_msg = ''
     # POST 요청이 왔을때만 if문이 실행됩니다.
     if request.method == 'POST':
-        input_name = request.form["signup_input_name"]
-        input_id = request.form["signup_input_id"]
-        input_pw = request.form["signup_input_pw"]
+        input_name = request.form["name"]
+        input_id = request.form["id"]
+        input_pw = request.form["password"]
 
         confirm_name = confirm_name_id_pw.confirm_name(input_name)
         confirm_id = confirm_name_id_pw.confirm_id(input_id)
