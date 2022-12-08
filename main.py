@@ -103,7 +103,7 @@ def login():
                 '로그인 실패')
 
     return render_template('login.html'), logger.info('로그인 페이지 이동'), info_logger.info(
-        '로그인 페이지 이ㅌ')  # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
+        '로그인 페이지 이동')  # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
 
 
 @app.route('/logout')
