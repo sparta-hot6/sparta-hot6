@@ -34,9 +34,6 @@ def index():
             per_page=per_page,
             pagination=pagination,)
 
-@app.route('/numbers', methods=('GET',))
-def number():
-    return posts
 
 
 

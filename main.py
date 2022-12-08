@@ -60,7 +60,7 @@ def home():
                                page=page,
                                per_page=per_page,
                                pagination=pagination,
-                               )
+                               ), logger.info('로그인 상태'), info_logger.info('로그인상태')
     else:
         return render_template("index.html",
                                login = False,
@@ -68,14 +68,14 @@ def home():
                                page=page,
                                per_page=per_page,
                                pagination=pagination,
-                               )
+                               ),logger.info('로그아웃 상태'), info_logger.info('로그아웃 상태')
     
 
 # ---- login -- 로그인 구역 -----------------------------------------------------------------
 @app.route('/login', methods = ["GET","POST"])
 def login():
     if "PRIMARY_KEY_ID" in session:
-        return render_template("index.html", user_name = session.get("login_name"), login = True)
+        return render_template("index.html", user_name = session.get("login_name"), login = True) ,logger.info('이미로그인 됨'), info_logger.info('이미로그인됨')
 
     login_confirm = ''
     if request.method == 'POST':
@@ -87,24 +87,24 @@ def login():
         if login_info is not None:                                 # None이 아닐경우 session 저장됩니다.
             session['login_name']      = login_info["name"]        # session 으로 name 을 저장해 유저의 이름을 활용할수있습니다.
             session['PRIMARY_KEY_ID']  = login_info["id"]          # session 으로 유저의 고유번호를 저장 
-            return redirect(url_for("home"))                       # 세션이 저장되고 home 으로 보냅니다.
+            return redirect(url_for("home")),logger.info('로그인 성공'), info_logger.info('로그인 성공')                       # 세션이 저장되고 home 으로 보냅니다.
 
         elif login_info is None:                                                    
             login_confirm = '아이디와 비밀번호를 확인해주세요.'      # input값들과 같은것이 없다면 에러 (None일 경우)
-            return render_template('login.html', login_confirm = login_confirm)
+            return render_template('login.html', login_confirm = login_confirm), logger.info('로그인 실패'), info_logger.info('로그인 실패')
             
-    return render_template('login.html')                           # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
+    return render_template('login.html'),logger.info('로그인 페이지 이동'), info_logger.info('로그인 페이지 이ㅌ')                           # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
 
 @app.route('/logout')
 def logout():
     session.pop("PRIMARY_KEY_ID")                                  # 로그아웃 버튼을 누르면 세션이 제거됩니다.
-    return redirect(url_for("home"))                               
+    return redirect(url_for("home")),logger.info('로그아웃'), info_logger.info('로그아웃')
 
 # ---- signup -- 회원가입  ------------------------------------------------------------------
 @app.route("/signup", methods = ["GET","POST"])                               
 def signup():
     if "PRIMARY_KEY_ID" in session:
-        return render_template("index.html", user_name = session.get("login_name"), login = True)
+        return render_template("index.html", user_name = session.get("login_name"), login = True),logger.info('로그인 상태'), info_logger.info('로그인 상태')
 
     already_name_msg = ''
     already_id_msg   = ''
@@ -122,11 +122,11 @@ def signup():
 
         if already_exists_name != None:
             already_name_msg = f'{input_name}은 이미 가입된 이름입니다 이름, 혹은 닉네임으로 입력해주세요.'
-            return render_template('signup.html' , already_name_msg = already_name_msg) # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
+            return render_template('signup.html' , already_name_msg = already_name_msg),logger.info('이미있는 이름'), info_logger.info('이미있는 이름') # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
         
         if already_exists_id != None:
             already_id_msg   = f'{input_id}은 이미 가입된 ID 입니다.'
-            return render_template('signup.html' , already_id_msg = already_id_msg)
+            return render_template('signup.html' , already_id_msg = already_id_msg),logger.info('이미있는 ID'), info_logger.info('이미있는 ID')
 
         if confirm_id is not True:
             return render_template('signup.html', confirm_id_msg = confirm_id)      # 3가지 모두 True가 아니면 넘어가지 않습니다.
@@ -138,13 +138,13 @@ def signup():
 
         if already_exists_name == None and already_exists_id == None:
             dbfunction.save_user_info(input_name, input_id, input_pw)               # MySQL 데이터베이스에 새로운 사용자를 추가 하고 회원가입 메시지를 반환합니다.
-            return redirect(url_for("signupsucceded"))                              # 회원가입 성공 페이지로 이동합니다.
+            return redirect(url_for("signupsucceded")),logger.info('회원가입 성공'), info_logger.info('회원가입 성공')                              # 회원가입 성공 페이지로 이동합니다.
 
-    return render_template('signup.html')                                           # POST요청 없을떄는 render_template('signup.html')
+    return render_template('signup.html'),logger.info('회원가입 페이지 이동'), info_logger.info('회원가입 페이지 이동')                                           # POST요청 없을떄는 render_template('signup.html')
 
 @app.route("/signupsucceded")                       # 회원가입 완료
 def signupsucceded():
-    return render_template("signupsucceded.html")
+    return render_template("signupsucceded.html"),logger.info('가입 완료 페이지'), info_logger.info('가입 완료 페이지')
 
 @app.route("/withdrawal")                           # 회원탈퇴
 def withdrawal():
