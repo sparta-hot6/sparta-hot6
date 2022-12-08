@@ -49,9 +49,9 @@
     <form id="signupForm" method="POST" action="{{url_for('signup')}}">
     <h1>Please Sign Up</h1>
     <div class="form-floating1">
-        <input type="id" class="form-control" id="signupid" name="signup_input_id" placeholder="Make ID" maxlength="20">
+        <input type="id" class="form-control" id="signupid" name="signup_input_id" placeholder="Make ID" maxlength="20" value="{{input_id}}">
         <label for="floatingInput"></label>
-        <input type="id" class="form-control" id="signupname" name="signup_input_name" placeholder="Your name" maxlength="20">
+        <input type="id" class="form-control" id="signupname" name="signup_input_name" placeholder="Your name" maxlength="20" value="{{input_name}}">
         <label for="floatingInput"></label>
     </div>
     
@@ -70,15 +70,7 @@
     </a>
     <p class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
     
-    <div id="confirm_id_msg">{{confirm_id_msg}}</div>
-    <div id="confirm_name_msg">{{confirm_name_msg}}</div>
-    <div id="confirm_pw_msg">{{confirm_pw_msg}}</div>
-    {% if already_name_msg %}
-    <div id="already_name_msg">{{already_name_msg}}</div>
-    {% endif %}
-    {% if already_id_msg %}
-    <div id="already_id_msg">{{already_id_msg}}</div>
-    {% endif %}
+    <p>{{confirm_id_name_pw}}{{confirm_id_msg}}{{confirm_name_msg}}{{confirm_pw_msg}}{{already_name_msg}}{{already_id_msg}}</p>
 
 </body>
 

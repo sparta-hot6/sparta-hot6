@@ -27,16 +27,18 @@
         min-height: 100vh;
         text-align: center;
     }
-
+    #loginbutton{
+        color: whitesmoke;
+    }
 
 </style>
 
-<body>
-    <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
-    <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
-    <button>
-        <a href="{{url_for('login')}}">로그인 하러가기</a>
-    </button>
-</body>
+    <body>
+        <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
+        <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
+        <form action="{{url_for('login')}}">
+        <button class="w-100 btn btn-lg btn-primary" id="loginbutton">로그인 하러가기</button>
+        </fozrm>
+    </body>
 
 </html>
