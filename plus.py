@@ -9,7 +9,7 @@ from loginfunctions import confirm_name_id_pw
 import string
 import dbfunction  # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
-app = Flask(__name__, static_folder='./plus/static', template_folder='./plus/template')
+app = Flask(__name__, static_folder='./plus/static', template_folder='./plus/templates')
 app.secret_key = "hotsix_secret_key"
 
 # 로그 생성

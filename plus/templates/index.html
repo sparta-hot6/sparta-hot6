@@ -25,13 +25,6 @@
     }
   </style>
 {% endblock style %}
-{% block header %}
-<p id="loginTrue">{{user_name}}</p>
-<div id="loginoutBox">
-    <a id="loginBox"><button onclick="window.location.href='{{ url_for("login") }}'">로그인</button></a>
-    <!-- <a href= {{ url_for("logout") }} id="logoutBox"><button>로그아웃</button></a> -->
-</div>
-{% endblock header %}
 {% block main %}
 <h1 id="home">뉴스피드 홈 화면 입니다.</h1>
 {% endblock main %}

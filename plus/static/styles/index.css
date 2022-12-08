@@ -1,0 +1,51 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkred;
+  padding: 8px 12px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar_logo { 
+  font-size: 33px;
+  color: white;
+}
+
+.navbar_logo i {
+  color: lightcoral;
+}
+
+.navbar_menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_menu li {
+  padding: 8px 40px;
+}
+
+.navbar_menu li:hover {
+  background-color: #af5252;
+  border-radius: 4px;
+}
+.navbar_sign {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_sign li {
+  padding: 8px 15px;
+}
+
+.navbar_sign li:hover {
+  background-color: #af5252;
+  border-radius: 4px;
+}
