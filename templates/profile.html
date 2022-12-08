@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/mainSection.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/feed.css">
+    <script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="/static/js/script.js"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>PROFILE PAGE</h1>
+    <div>
+        <button onclick = "location.href = '{{url_for('home')}}' " type='button'>HOME</button>
+    </div>
+</header>
+<section>
+    <img id="back_img" src="/static/img/배경예시.jpg" alt="img">
+    <div class="profile">
+        <img id="profile_img" src="/static/img/기본 이미지.jpg" alt="img">
+        <h1 id="profile_name">${name}</h1>
+        <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="profile_btn">프로필 수정</button>
+    </div>
+
+    <hr style="width:80%">
+    <h2 style="margin-left:10%">내가 작성한 글</h2>
+</section>
+<div class="container">
+    <div class="feed">
+        <h3 class="name">이름</h3>
+        <p class="content">{{data[0]["post_text"]}}</p>
+        <div class="accessory">
+            <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+        </div>
+    </div>
+    <div class="feed">
+        <h3 class="name">이름</h3>
+        <p class="content">123</p>
+        <div class="accessory">
+            <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+        </div>
+    </div>
+    <div class="feed">
+        <h3 class="name">이름</h3>
+        <p class="content">123</p>
+        <div class="accessory">
+            <img src="/static/img/ic_comment.jpg" width="16px"> Comments
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

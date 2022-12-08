@@ -1,0 +1,29 @@
+.container{
+    width : 80%;
+    margin : auto;
+}
+.feed {
+    background-color: ghostwhite;
+    padding : 10px;
+    margin-top : 15px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 3px 2px gray;
+}
+.date {
+    color: #999;
+    margin-bottom: 10px;
+}
+.name {
+    color: #6184dddd;
+    font-weight: 600;
+}
+.content {
+    margin-top: 5px;
+}
+.accessory {
+    border-top: 1px solid #eee;
+    padding-top:10px;
+    margin-top:10px;
+    color: #999;
+    font-size: 14px;
+}
