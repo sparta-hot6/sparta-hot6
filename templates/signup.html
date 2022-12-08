@@ -28,6 +28,7 @@
   }
 </style>
 {% endblock style %}
+{% block header %}{% endblock header %}
 {% block main %}
   <a href="{{url_for('home')}}">home</a>
 
@@ -65,3 +66,4 @@
   <div id="already_id_msg">{{already_id_msg}}</div>
   {% endif %}
 {% endblock main %}
+{% block script %}{% endblock script %}

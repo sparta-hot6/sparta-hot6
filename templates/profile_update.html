@@ -1,95 +1,99 @@
 {% extends 'base.html' %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="/static/css/profile_update.css">
+{% endblock style %}
+{% block header %}{% endblock header %}
 {% block main %}
-<div class="profile_update_top">
-  <h1>프로필 수정</h1>
-</div>
-<!--프로필 사진 부분-->
-<div class="profile_update">
-  프로필 사진 <input class="file-input" id="profile-input" type="file"></input> <label for="profile-input">수정</label>
-</div>
-<img id="profile_img_update" src="/static/img/기본 이미지.jpg" alt="img">
-<!--배경 사진 부분-->
-<div class="profile_update">
-  배경 사진 <input class="file-input" id="background-input" type="file"></input> <label for="background-input">수정</label>
-</div>
-<img id="back_img_update" src="/static/img/배경예시.jpg" alt="img">
-<button onclick = "location.href = '{{url_for('profile')}}' " type='button'>수정 완료</button>
-</div>
+  <div class="profile_update_top">
+    <h1>프로필 수정</h1>
+  </div>
+  <!--프로필 사진 부분-->
+  <div class="profile_update">
+    프로필 사진 <input class="file-input" id="profile-input" type="file"></input> <label for="profile-input">수정</label>
+  </div>
+  <img id="profile_img_update" src="{{ url_for('static', filename="img/기본 이미지.jpg")}}" alt="img">
+  <!--배경 사진 부분-->
+  <div class="profile_update">
+    배경 사진 <input class="file-input" id="background-input" type="file"></input> <label for="background-input">수정</label>
+  </div>
+  <img id="back_img_update" src="{{ url_for('static', filename="img/배경예시.jpg")}}" alt="img">
+  <button onclick = "location.href = '{{url_for('profile')}}' " type='button'>수정 완료</button>
+  </div>
 {% endblock main %}
 {% block script %}
-<script>
-  function updateProfile(input, previewImage, data_name) {
-    let data = {}
-    const selectedFile = input.files
-    
-    formData = new FormData()
-    if (selectedFile[0]) {
-      formData.append(data_name, selectedFile[0])
+  <script>
+    function updateProfile(input, previewImage, data_name) {
+      let data = {}
+      const selectedFile = input.files
+      
+      formData = new FormData()
+      if (selectedFile[0]) {
+        formData.append(data_name, selectedFile[0])
+      }
+      $.ajax({
+        type: "PUT",
+        url: "/api/profile",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+        console.log('성공')
+        },
+      });
+
     }
+    function readImage(input, previewImage, data_name) {
+      // 인풋 태그에 파일이 있는 경우
+      if(input.files && input.files[0]) {
+          // 이미지 파일인지 검사 (생략)
+          // FileReader 인스턴스 생성
+          const reader = new FileReader()
+          // 이미지가 로드가 된 경우
+          reader.onload = e => {
+              previewImage.src = e.target.result
+          }
+          // reader가 이미지 읽도록 하기
+          reader.readAsDataURL(input.files[0])
+      }
+    }
+
+
+
+  // input file에 change 이벤트 부여
+  window.onload = function () {
     $.ajax({
-      type: "PUT",
+      type: "GET",
       url: "/api/profile",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function (response) {
-       console.log('성공')
+      data: {},
+      success: function (data) {
+        const { profile_image, background_image } = data;
+        if (background_image) {
+          bg_path = "/api/file/" + background_image;
+          $("#back_img_update").attr("src", bg_path);
+        }
+        if (profile_image) {
+          pf_path = "/api/file/" + profile_image;
+          $("#profile_img_update").attr("src", pf_path);
+        }
       },
     });
 
+    const profileInput = document.getElementById("profile-input")
+    const profileImgUpdate = document.getElementById("profile_img_update")
+    const backInput = document.getElementById("background-input")
+    const backImgUpdate = document.getElementById("back_img_update")
+
+    
+
+    profileInput.addEventListener("change", e => {
+      readImage(e.target, profileImgUpdate, 'pf_img')
+      updateProfile(e.target, profileImgUpdate, 'pf_img')
+    })
+    backInput.addEventListener("change", e => {
+      readImage(e.target, backImgUpdate, 'bg_img')
+      updateProfile(e.target, backImgUpdate, 'bg_img')
+    })
   }
-  function readImage(input, previewImage, data_name) {
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
-        // 이미지 파일인지 검사 (생략)
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            previewImage.src = e.target.result
-        }
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-    }
-  }
-
-
-
-// input file에 change 이벤트 부여
-window.onload = function () {
-  $.ajax({
-    type: "GET",
-    url: "/api/profile",
-    data: {},
-    success: function (data) {
-      const { profile_image, background_image } = data;
-      if (background_image) {
-        bg_path = "/api/file/" + background_image;
-        $("#back_img_update").attr("src", bg_path);
-      }
-      if (profile_image) {
-        pf_path = "/api/file/" + profile_image;
-        $("#profile_img_update").attr("src", pf_path);
-      }
-    },
-  });
-
-  const profileInput = document.getElementById("profile-input")
-  const profileImgUpdate = document.getElementById("profile_img_update")
-  const backInput = document.getElementById("background-input")
-  const backImgUpdate = document.getElementById("back_img_update")
-
-  
-
-  profileInput.addEventListener("change", e => {
-    readImage(e.target, profileImgUpdate, 'pf_img')
-    updateProfile(e.target, profileImgUpdate, 'pf_img')
-  })
-  backInput.addEventListener("change", e => {
-    readImage(e.target, backImgUpdate, 'bg_img')
-    updateProfile(e.target, backImgUpdate, 'bg_img')
-  })
-}
-</script>
+  </script>
 {% endblock script %}

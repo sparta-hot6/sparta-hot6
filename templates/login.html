@@ -27,6 +27,7 @@
   }
 </style>
 {% endblock style %}
+{% block header %}{% endblock header %}
 {% block main %}
 <a href="{{ url_for('home')}}">home</a>
     <!-- form method="POST" 에  methods  s 를 붙이면 안된다... 이것때문에 4시간 날렷습니다.-->
@@ -49,3 +50,4 @@
     </form>
         <div id="login_confirm">{{login_confirm}}</div>
 {% endblock main %}
+{% block script %}{% endblock script %}

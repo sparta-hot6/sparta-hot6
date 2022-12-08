@@ -12,14 +12,14 @@
         min-height: 100vh;
         text-align: center;
     }
-
-
   </style>
 {% endblock style %}
+{% block header %}{% endblock header %}
 {% block main %}
   <h1 id="signupsucceded">HOTSIX 회원가입 성공!!</h1>
   <!-- <h1 id="signupsucceded">{{already_signup}}</h1> -->
-  <button>
-      <a href="{{url_for('login')}}">로그인 하러가기</a>
+  <button onclick="{{ window.location.href = {{ url_for('login') }} }}">
+      로그인 하러가기
   </button>
 {% endblock main %}
+{% block script %}{% endblock script %}

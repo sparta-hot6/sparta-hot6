@@ -13,9 +13,9 @@
 {% endblock header %}
 {% block main %}
 <section>
-  <img id="back_img" src="/static/img/배경예시.jpg" alt="img">
+  <img id="back_img" src="{{ url_for('static', filename="img/배경예시.jpg")}}" alt="img">
   <div class="profile">
-      <img id="profile_img" src="/static/img/기본 이미지.jpg" alt="img">
+      <img id="profile_img" src="{{ url_for('static', filename="img/기본 이미지.jpg")}}" alt="img">
       <h1 id="profile_name">${name}</h1>
       <button onclick = "location.href = '{{url_for('profile_update')}}' " type='button' id="profile_btn">프로필 수정</button>
   </div>
