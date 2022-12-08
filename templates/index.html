@@ -60,7 +60,7 @@
 const loginTrue = document.querySelector("#loginTrue").innerText
 const loginBoxTemp = `<a href= {{ url_for("login") }} id="loginBox"><button>로그인</button></a>`
 const logoutBoxTemp = `<a href= {{ url_for("logout") }} id="logoutBox"><button>로그아웃</button></a>`
-const profileBoxTemp = `<a href= {{ url_for("profile/<id>") }} id="logoutBox"><button>내 프로필</button></a>`
+const profileBoxTemp = `<a href= {{ url_for("profile") }} id="logoutBox"><button>내 프로필</button></a>`
 
 if (Boolean(loginTrue) == true){
     $('#loginoutBox').empty()

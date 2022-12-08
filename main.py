@@ -38,7 +38,7 @@ logger.addHandler(fileHandler)
 
 def connect_db():
     db = pymysql.connect(host="localhost", port=3306, user='root',
-                         passwd='sparta', db='hotsix', charset='utf8',
+                         passwd='gksehdwn123', db='hotsix', charset='utf8',
                          cursorclass=pymysql.cursors.DictCursor)
     return db
 
@@ -96,10 +96,13 @@ def signup():
     return render_template('signup.html'), logger.info('회원가입 페이지')
 
 
-@app.route("/profile/<id>", methods=['GET'])
-def profile(id):
+@app.route("/profile", methods=['GET'])
+def profile():
+    if "PRIMARY_KEY_ID" not in session:
+        return redirect(url_for('home'))
+    id = session['PRIMARY_KEY_ID']
     curs = connect_db().cursor()
-    sql = f"select * from post where id = {id}"
+    sql = f"select * from post where id={id}"
     curs.execute(sql)
 
     rows = curs.fetchall()
