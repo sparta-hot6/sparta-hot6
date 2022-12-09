@@ -1,9 +1,10 @@
-from flask import url_for, session, Flask, render_template, request, redirect, flash, abort, make_response, Response
+from flask import url_for, session, Flask, render_template , request , redirect
 import requests
 import pymysql
 import logging
 from flask_paginate import Pagination, get_page_args
 import logging.handlers
+
 from api import api
 from pymysql.cursors import DictCursor
 
@@ -11,7 +12,7 @@ from loginfunctions import confirm_name_id_pw
 import string
 import dbfunction  # db를 다루는 함수를 만들어서 가져다 씁시다. dbfunction.함수() 형식으로 가져올수있습니다.
 
-app = Flask(__name__, template_folder='./templates', static_folder='./static')
+app = Flask(__name__)
 app.secret_key = "hotsix_secret_key"
 
 # ---- logging -- 로그 구역 ----------------------------------------------------------------
@@ -65,6 +66,7 @@ def home():
                             css_framework='bootstrap5')
     # PRIMARY_KEY_ID = 로그인한 유저의 고유번호 입니다.
     if "PRIMARY_KEY_ID" in session:
+        session['prevent_back'] = True
         return render_template("index.html",
                                user_name=session.get("login_name"),
                                login=True,
@@ -82,13 +84,11 @@ def home():
                                pagination=pagination,
                                ), logger.info('로그아웃 상태'), info_logger.info('로그아웃 상태')
 
-
 # ---- login -- 로그인 구역 -----------------------------------------------------------------
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    if "PRIMARY_KEY_ID" in session:  # 세션이 있을때는 뒤로가기, 임의로 사이트주소를 입력해도 홈으로 돌아갑니다.
-        return render_template("index.html", user_name=session.get("login_name"), login=True), logger.info(
-            '이미로그인 됨'), info_logger.info('이미로그인됨')
+    if session.get('prevent_back'):
+        return redirect(url_for('home'))                           # 세션이 있을때는 뒤로가기, 임의로 사이트주소를 입력해도 홈으로 돌아갑니다.
 
     login_confirm = ''
     if request.method == 'POST':
@@ -127,7 +127,7 @@ def login():
             return redirect(url_for("home")), logger.info('로그인 성공'), info_logger.info(
                 '로그인 성공')  # 세션이 저장되고 home 으로 보냅니다.
 
-    return render_template('login.html')  # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
+    return render_template('login.html')                           # POST 요청이 오기전에는 login.html을 렌더링 해줍니다.
 
 
 @app.route('/logout')
@@ -137,18 +137,19 @@ def logout():
 
 
 # ---- signup -- 회원가입  ------------------------------------------------------------------
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    if "PRIMARY_KEY_ID" in session:  # 세션이 있을때는 뒤로가기, 임의로 사이트주소를 입력해도 홈으로 돌아갑니다.
-        return render_template("index.html", user_name=session.get("login_name"), login=True), logger.info(
-            '로그인 상태'), info_logger.info('로그인 상태')
-    # ----------------------------------------------------------------------  -------------------
+@app.route("/signup", methods = ["GET","POST"])                               
+def signup(): 
+    if session.get('prevent_back'):
+        return redirect(url_for('home'))                                              # 세션이 있을때는 뒤로가기, 임의로 사이트주소를 입력해도 홈으로 돌아갑니다.
+
+#----------------------------------------------------------------------  -------------------
     already_name_msg = ''
-    already_id_msg = ''
-    if request.method == 'POST':  # POST 요청이 왔을때만 if문이 실행됩니다.
-        input_name = request.form["signup_input_name"]
-        input_id = request.form["signup_input_id"]
-        input_pw = request.form["signup_input_pw"]
+    already_id_msg   = ''
+    if request.method == 'POST':                                                      # POST 요청이 왔을때만 if문이 실행됩니다.      
+        input_name = request.form["signup_input_name"]                
+        input_id   = request.form["signup_input_id"]
+        input_pw   = request.form["signup_input_pw"]
+        input_pw_confirm = request.form["signup_confirm_pw"]
 
         confirm_name = confirm_name_id_pw.confirm_name(input_name)
         confirm_id = confirm_name_id_pw.confirm_id(input_id)
@@ -161,34 +162,38 @@ def signup():
         elif input_name == "":
             return render_template('signup.html', confirm_name_msg="이름을 입력해주세요", input_id=input_id)
         elif input_pw == "":
-            return render_template('signup.html', confirm_pw_msg="비밀번호를 입력해주세요", input_name=input_name,
-                                   input_id=input_id)
-        # ----------------------------------------------------------------------
-        already_exists_name = dbfunction.already_exists_id_name(input_name, 'name')  # 이미 회원가입이 되어있는 아이디인지 체크합니다.
-        already_exists_id = dbfunction.already_exists_id_name(input_id, 'login_id')
+            return render_template('signup.html', confirm_pw_msg = "비밀번호를 입력해주세요", input_name = input_name, input_id = input_id)
+        elif input_pw_confirm == "":
+            return render_template('signup.html', confirm_pw_c_msg = "비밀번호 확인을 해주세요", input_name = input_name, input_id = input_id)
 
-        if already_exists_name != None:  # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
+#----------------------------------------------------------------------
+        already_exists_name = dbfunction.already_exists_id_name(input_name, 'name') # 이미 회원가입이 되어있는 아이디인지 체크합니다.
+        already_exists_id   = dbfunction.already_exists_id_name(input_id, 'login_id')
+
+        if already_exists_id != None:
+            already_id_msg   = f'{input_id}은 이미 가입된 ID 입니다.'                  # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
+            return render_template('signup.html' , already_id_msg = already_id_msg, input_name = input_name, input_id = input_id)
+
+        elif already_exists_name != None:                                             # name이 이미 가입된 name일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
             already_name_msg = f'{input_name}은 이미 가입된 이름입니다 다른 이름, 혹은 닉네임으로 입력해주세요.'
-            return render_template('signup.html', already_name_msg=already_name_msg, input_name=input_name,
-                                   input_id=input_id), logger.info(
-                '이미있는 이름'), info_logger.info('이미있는 이름')  # ID가 이미 가입된 아이디일 경우 DB에 저장되지않고 다시 회원가입 페이지로 갑니다.
+            return render_template('signup.html' , already_name_msg = already_name_msg, input_name = input_name, input_id = input_id ) 
+#----------------------------------------------------------------------
 
-        elif already_exists_id != None:
-            already_id_msg = f'{input_id}은 이미 가입된 ID 입니다.'
-            return render_template('signup.html', already_id_msg=already_id_msg, input_name=input_name,
-                                   input_id=input_id), logger.info(
-                '이미있는 ID'), info_logger.info('이미있는 ID')
-        # ----------------------------------------------------------------------
-
-        if confirm_id is not True:  # 3가지 모두 True가 아니면 넘어가지 않습니다.
-            return render_template('signup.html', confirm_id_msg=confirm_id, input_name=input_name, input_id=input_id)
+        if confirm_id is not True:                                                  # 3가지 모두 True가 아니면 넘어가지 않습니다.
+            return render_template('signup.html', confirm_id_msg = confirm_id, input_name = input_name, input_id = input_id)      
         if confirm_name is not True:
             return render_template('signup.html', confirm_name_msg=confirm_name, input_name=input_name,
                                    input_id=input_id)
         if confirm_pw is not True:
-            return render_template('signup.html', confirm_pw_msg=confirm_pw, input_name=input_name, input_id=input_id)
-        # ----------------------------------------------------------------------
+            return render_template('signup.html', confirm_pw_msg = confirm_pw, input_name = input_name, input_id = input_id)    
+#----------------------------------------------------------------------
+        if input_pw_confirm != input_pw:
+            return render_template('signup.html', confirm_pw_c_msg = "비밀번호 확인이 틀렸습니다 다시입력해주시요.", input_name = input_name, input_id = input_id)
 
+        elif input_pw_confirm == input_pw:                                          # 최종적으로 비밀번호 확인이 맞아야 회원가입이 진행됩니다.
+            if already_exists_name == None and already_exists_id == None:           # 위의 유효성 검사를 통과한 입력값이 있을시 통과
+                dbfunction.save_user_info(input_name, input_id, input_pw)           # MySQL 데이터베이스에 새로운 사용자를 추가 하고
+                return redirect(url_for("signupsucceded"))                          # 회원가입 성공 페이지로 이동합니다.
         if already_exists_name == None and already_exists_id == None:  # 위의 유효성 검사를 통과한 입력값이 있을시 통과
             dbfunction.save_user_info(input_name, input_id, input_pw)  # MySQL 데이터베이스에 새로운 사용자를 추가 하고 회원가입 메시지를 반환합니다.
             return redirect(url_for("signupsucceded")), logger.info('회원가입 성공'), info_logger.info(
