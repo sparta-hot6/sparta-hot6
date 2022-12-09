@@ -85,8 +85,8 @@ def init_mysql():
     cursor.execute("""
     INSERT INTO user (id, name, login_id, password)
     VALUES
-    (1, '테스트1', 'test_id_01', 'test1'),
-    (2, '테스트2', 'test_id_02', 'test2');
+    (1, '테스트1', 'test_id_01', '$2b$12$3u8I4oywtcOuLoCzedjvCu0OWCfR5Dq1l/huAmrQKz7dCvX1EmmFi'),
+    (2, '테스트2', 'test_id_02', '$2b$12$3u8I4oywtcOuLoCzedjvCu0OWCfR5Dq1l/huAmrQKz7dCvX1EmmFi');
     """)
     cursor.execute("""
     INSERT INTO
