@@ -4,36 +4,38 @@
 <link href="{{url_for('static', filename='styles/signup.css')}}" rel="stylesheet" type="text/css">
 {% endblock style %}
 {% block main %}
-<a href="{{url_for('home')}}">home</a>
+    <a href="{{ url_for('home')}}"><img id="homeimage" src="static\image\free-icon-fire-1211048.png"></a>
 
-<form id="signupForm" method="POST" action="{{url_for('signup')}}">
-    <h1>Please Sign Up</h1>
+    <form id="signupForm" method="POST" action="{{url_for('signup')}}">
+    <h1 id="PleaseSignUp">Please Sign Up</h1>
     <div class="form-floating1">
-        <input type="id" class="form-control" id="signupid" name="signup_input_id" placeholder="Make ID" maxlength="20"
-               value="{{input_id}}">
+        <input type="id" class="form-control" id="signupid" name="signup_input_id" placeholder="* Make ID" maxlength="20" value="{{input_id}}">
         <label for="floatingInput"></label>
-        <input type="id" class="form-control" id="signupname" name="signup_input_name" placeholder="Your name"
-               maxlength="20" value="{{input_name}}">
+        <input type="id" class="form-control" id="signupname" name="signup_input_name" placeholder="* Your name" maxlength="20" value="{{input_name}}">
         <label for="floatingInput"></label>
     </div>
 
     <div class="form-floating2">
-        <input type="password" class="form-control" id="signuppw" name="signup_input_pw" placeholder="Make Password"
-               maxlength="20">
+        <input type="password" class="form-control" id="signuppw" name="signup_input_pw" placeholder="* Make Password" maxlength="20">
         <label for="floatingPassword"></label>
-        <!-- <input type="password" class="form-control" id="floatingPassword" name="signup_confirm_pw" placeholder="Confirm Password">
-        <label for="floatingPassword"></label> -->
+        <input type="password" class="form-control" id="floatingPassword" name="signup_confirm_pw" placeholder="* Confirm Password" maxlength="20">
+        <label for="floatingPassword"></label>
     </div>
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
-</form>
+    </form>
 
-<a href="{{ url_for('login') }}">
-    <p class="backlogin">Back Login</p>
-</a>
-<p class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
-
-<p>
-    {{confirm_id_name_pw}}{{confirm_id_msg}}{{confirm_name_msg}}{{confirm_pw_msg}}{{already_name_msg}}{{already_id_msg}}</p>
+    <a href="{{ url_for('login') }}">
+        <p class="backlogin">Back Login</p>
+    </a>
+    <p id="confirms">{{confirm_id_name_pw}}
+        {{confirm_id_msg}}
+        {{confirm_name_msg}}
+        {{confirm_pw_msg}}
+        {{already_name_msg}}
+        {{already_id_msg}}
+        {{confirm_pw_c_msg}}
+    </p>
+    <p class="mt-5 mb-3 text-muted" id="HOTSIX">&copy;HOTSIX</p>
 
 {% endblock main %}

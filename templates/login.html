@@ -4,25 +4,26 @@
 <link href="{{url_for('static', filename='styles/login.css')}}" rel="stylesheet" type="text/css">
 {% endblock style %}
 {% block main %}
-<a href="{{ url_for('home')}}">home</a>
-<!-- form method="POST" 에  methods  s 를 붙이면 안된다... 이것때문에 4시간 날렷습니다.-->
-<form onsubmit="return handleSubmit()" method="POST" id="login" action="{{url_for('login')}}">
-    <h1>Please login</h1>
-    <div class="form-floating1">
-        <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID"
-               value="{{input_id}}">
-        <label for="floatingInput"></label>
-    </div>
-    <div class="form-floating2">
-        <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
-               placeholder="Password">
-        <label for="floatingPassword"></label>
-    </div>
-    <button onclick="confirmInput()" class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-    <a href="{{ url_for('signup')}}">
-        <p class="signup">Sign Up</p>
-    </a>
-    <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
-</form>
-<p id="login_confirm">{{login_confirm}}</p>
+   <a href="{{ url_for('home')}}"><img id="homeimage" src="static\image\free-icon-fire-1211048.png"></a>
+    <form onsubmit="return handleSubmit()" method="POST" id="login" action="{{url_for('login')}}">
+        <h1>Please login</h1>
+        <div class="form-floating1">
+            <input type="id" class="form-control" id="floatingInput" name="floatingInput" placeholder="ID" value="{{input_id}}">
+            <label for="floatingInput"></label>
+        </div>
+        <div class="form-floating2">
+            <input type="password" class="form-control" id="floatingPassword" name="floatingPassword"
+                placeholder="Password">
+            <label for="floatingPassword"></label>
+        </div>
+        <button onclick="confirmInput()" class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+        <a href="{{ url_for('signup')}}">
+            <p class="signup">Sign Up</p>
+        </a>
+
+    </form>
+        <p id="login_confirm">{{login_confirm}}</p>
+
+        <p id="HOTSIX" class="mt-5 mb-3 text-muted">&copy;HOTSIX</p>
+
 {% endblock main %}
