@@ -9,8 +9,12 @@ main {
     text-align: center;
 }
 
+/* #PleaseSignUp {
+    font-size: 150%;
+} */
+
 .backlogin {
-    margin-top: 5%;
+    margin-top: 11px;
 }
 
 .form-floating1 {
@@ -21,3 +25,45 @@ main {
 .form-floating2 {
     color: black;
 }
+
+#homeimage {
+    width: 35%;
+    margin-top: 8%;
+    margin-bottom: 2%;
+}
+
+#homeimage {
+    transition: all 0.2s linear;
+}
+
+#homeimage:hover {
+    transform: scale(1.1);
+}
+
+a:link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 170, 0);
+    /* text-decoration: underline; */
+}
+
+a:active {
+    color: rgb(107, 118, 240);
+    text-decoration: none;
+}
+
+#confirms {
+    margin: 0px;
+}
+
+/* #HOTSIX {
+    margin: 0;
+} */
