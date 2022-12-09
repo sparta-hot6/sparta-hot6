@@ -39,15 +39,15 @@ def put_profile():
     if 'pf_name' in request.form:
         name = request.form['pf_name']
         setquery = setquery + \
-            f", name = {name}" if setquery else f"name = {name}"
+                   f", name = {name}" if setquery else f"name = {name}"
     if 'pf_img' in request.files:
         pf_img = upload_file(request.files['pf_img'])
         setquery = setquery + \
-            f", profile_image = '{pf_img}'" if setquery else f"profile_image = '{pf_img}'"
+                   f", profile_image = '{pf_img}'" if setquery else f"profile_image = '{pf_img}'"
     if 'bg_img' in request.files:
         bg_img = upload_file(request.files['bg_img'])
         setquery = setquery + \
-            f", background_image = '{bg_img}'" if setquery else f"background_image = '{bg_img}'"
+                   f", background_image = '{bg_img}'" if setquery else f"background_image = '{bg_img}'"
     if setquery:
         sql = f"""
       UPDATE user

@@ -1,36 +1,38 @@
 from flask import Flask, render_template, request, jsonify
-from flask_paginate import Pagination, get_page_args
+from flask_paginate import Pagination, get_page_args, get_page_parameter
 import pymysql
 import dbfunction
 
 app = Flask(__name__)
 
-app.template_folder = "templates"
-
-
-# generating data for pagination - 페이지 매김을 위한 데이터 생성
-# users 부분을 mysql과 연동하면 될 듯
 posts = dbfunction.get_posts_all()
 
 
-def get_posts(offset=0, per_page=10):
-    return posts[offset:offset + per_page]
+def get_posts(page, offset=0, per_page=5):
+    offset = ((page - 1) * per_page)
+    return posts[offset: offset + per_page]
 
 
 @app.route('/', methods=('GET',))
 def index():
-    #page 현재 페이지 번호, per_page 페이지당 보여줄 게시물 개수
-    page, per_page, offset = get_page_args(page_parameter="page", per_page_parameter="per_page")
+    page, per_page, offset = get_page_args(page_parameter="page",
+                                           per_page_parameter="per_page")
     total = len(posts)
-    pagination_posts = get_posts(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_pagee=per_page, total=total, css_framework='bootstrap5')
+    print(page, per_page, offset, total)
+
+    pagination_posts = get_posts(page=page, offset=offset, per_page=per_page)
+    print(pagination_posts)
+    pagination = Pagination(page=page,
+                            per_pagee=per_page,
+                            total=total,
+                            css_framework='bootstrap4',
+                            )
     return render_template(
-        'page.html',
+        'hot6.html',
         posts=pagination_posts,
         page=page,
         per_page=per_page,
-        pagination=pagination)
-
+        pagination=pagination, )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <title>HOT6</title>
+
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar_logo">
+        <i class="fa-sharp fa-solid fa-fire"></i>
+        <a href="">HOT6</a>
+    </div>
+
+    <ul class="navbar_menu">
+        <li><a href="">Home</a></li>
+        <li><a href="">Timeline</a></li>
+        <li><a href="">My page</a></li>
+        <li><a href="">FAQ</a></li>
+        <li><a href="">Hot</a></li>
+    </ul>
+
+    <ul class="navbar_sign">
+        <li><a href="">Login</a></li>
+        <li><a href="">Sign Up</a></li>
+    </ul>
+</nav>
+
+<div class="pagination">
+    <ol id="numbers">
+
+    </ol>
+</div>
+{% for post in posts %}
+<div class="main">
+    <div class="post">
+        <div class="info">
+            <div class="user">
+                <div class="profile-pic"><img src="{{post.profile_image}}" alt=""></div>
+                <p class="username">{{post.login_id}}</p>
+            </div>
+        </div>
+        <img src="post.image" class="post-image" alt="">
+        <div class="post-content">
+            <p class="description">{{post.post_text}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{{pagination.links}}
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+header {
+    background-color: cornflowerblue;
+    height : 40px;
+    display: flex;
+    align-items: center; /*세로 가운데 정렬*/
+    padding : 15px;
+    font-weight: bold;
+    box-shadow: 0 2px 3px 0 gray;
+    border-radius: 10px;
+    justify-content: space-between;
+    letter-spacing: 0.1rem;
+
+
+}
+header > button {
+    color: transparent;
+}
+header > div{
+    display: flex;
+    font-weight : lighter;
+    font-size: 10px;
+    gap : 10px;
+    color : white;
+}
