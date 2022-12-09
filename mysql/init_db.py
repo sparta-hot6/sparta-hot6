@@ -32,7 +32,7 @@ def init_mysql():
     NOT
     NULL,
     password
-    varchar(30)
+    varchar(100)
     NOT
     NULL,
     profile_image

@@ -29,7 +29,7 @@ formatter = logging.Formatter(
 streamHandler = logging.StreamHandler()
 log_max_size = 10 * 1024 * 1024
 log_file_count = 20
-fileHandler = logging.handlers.RotatingFileHandler(filename='./log.txt', maxBytes=log_max_size,
+fileHandler = logging.handlers.RotatingFileHandler(filename='log.log', maxBytes=log_max_size,
                                                    backupCount=log_file_count)
 # logger instance에 fomatter 설정
 streamHandler.setFormatter(formatter)
